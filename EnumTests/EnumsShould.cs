@@ -22,6 +22,7 @@ namespace EnumTests
             Red    = 0x01,
             Orange = 0x02,
             Yellow = 0x04,
+            //YellowOrange = 0x6,
             Green  = 0x08,
             Blue   = 0xA0,
             Indigo = 0xB0,
@@ -54,7 +55,6 @@ namespace EnumTests
         }
 
         #endregion
-
 
         #region Static Methods
         [Fact]
