@@ -1,4 +1,4 @@
-using Moq;
+﻿using Moq;
 using System;
 using Xunit;
 
@@ -25,10 +25,12 @@ namespace DelegateTests
             CountLettersDelegate del1 = _mockInterface1.Object.CountLetters;
             CountLettersDelegate del2 = _mockInterface2.Object.CountLetters;
 
-            CountLettersDelegate mcd = del1 + del2;
+            // create a multicast delegate that calls both methods
+            var mcd = del1 + del2;
 
             var output = mcd(input);
 
+            // make sure both mock methods were called
             _mockInterface1.Verify();
             _mockInterface2.Verify();
         }
@@ -47,10 +49,12 @@ namespace DelegateTests
             CountLettersDelegate del1 = _mockInterface1.Object.CountLetters;
             CountLettersDelegate del2 = _mockInterface2.Object.CountLetters;
 
-            CountLettersDelegate mcd = del1 + del2;
+            // create a multicast delegate that calls both methods
+            var mcd = del1 + del2;
 
             var output = mcd(input);
 
+            // make sure return value from last method is returned
             Assert.Equal(2, output);
         }
 
@@ -68,10 +72,12 @@ namespace DelegateTests
             CountLettersDelegate del = _mockInterface1.Object.CountLetters;
             del += _mockInterface2.Object.CountLetters;
 
+            // remove the method from mock interface 1
             del -= _mockInterface1.Object.CountLetters;
 
             var output = del(input);
 
+            // make sure mock interface 1 method wasn't called and 2 was called
             _mockInterface1.Verify(i => i.CountLetters(It.IsAny<string>()), Times.Never);
             _mockInterface2.Verify();
         }

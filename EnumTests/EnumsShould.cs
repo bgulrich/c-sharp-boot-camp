@@ -22,7 +22,8 @@ namespace EnumTests
             Red    = 0x01,
             Orange = 0x02,
             Yellow = 0x04,
-            //YellowOrange = 0x6,
+            // ToString will prefer combination values and use them alone if possible
+            // YellowOrange = 0x6,
             Green  = 0x08,
             Blue   = 0xA0,
             Indigo = 0xB0,

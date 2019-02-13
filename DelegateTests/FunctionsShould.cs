@@ -26,6 +26,7 @@ namespace DelegateTests
 
             del(input);
 
+            // make sure method called with correct arguments
             _mockInterface.Verify();
         }
 
@@ -41,6 +42,7 @@ namespace DelegateTests
 
             var result = del(input);
 
+            // make sure return value from method returned
             Assert.Equal(input.Length, result);
         }
     }

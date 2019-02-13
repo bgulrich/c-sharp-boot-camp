@@ -1,4 +1,4 @@
-using Moq;
+﻿using Moq;
 using System;
 using Xunit;
 
@@ -11,6 +11,14 @@ namespace DelegateTests
         // declare new delegate type
         private delegate int CountLettersDelegate(string input);
 
+        private static class SomeStaticClass
+        {
+            public static int CountLetters(string input)
+            {
+                return input.Length;
+            }
+        }
+
         public DelegatesShould()
         {
 
@@ -19,8 +27,6 @@ namespace DelegateTests
         [Fact]
         public void PassVariableToMethod()
         {
-            _mockInterface.Invocations.Clear();
-
             var input = "My input string";
 
             _mockInterface.Setup(i => i.CountLetters(It.Is<string>(s => s == input)))
@@ -33,6 +39,7 @@ namespace DelegateTests
 
             del(input);
 
+            // make sure the delegate called the method on the mock
             _mockInterface.Verify();
         }
 
@@ -48,7 +55,18 @@ namespace DelegateTests
 
             var result = del(input);
 
+            // make sure the delegate returns the same value as the method
             Assert.Equal(input.Length, result);
+        }
+
+        [Fact]
+        public void WorkWithStaticMethodsToo()
+        {
+            var del = new CountLettersDelegate(SomeStaticClass.CountLetters);
+
+            var input = "Howdy!!!";
+
+            Assert.Equal(input.Length, del(input));
         }
     }
 }

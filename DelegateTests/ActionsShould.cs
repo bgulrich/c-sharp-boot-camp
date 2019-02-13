@@ -13,8 +13,6 @@ namespace DelegateTests
         [Fact]
         public void PassVariableToMethod()
         {
-            _mockInterface.Invocations.Clear();
-
             var inputString = "My input string";
             var inputInt = 100;
 
@@ -28,6 +26,7 @@ namespace DelegateTests
 
             del(inputString, inputInt);
 
+            // make sure method called with correct arguments
             _mockInterface.Verify();
         }
     }
