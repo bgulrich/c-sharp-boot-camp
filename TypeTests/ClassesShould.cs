@@ -29,21 +29,22 @@ namespace TypeTests
         }
         #endregion
 
-        [Fact]
-        public void BeAllocatedOnTheHeapWhenDeclaredAsLocals()
-        {
-            var initialMemoryUsed = GC.GetTotalMemory(true);
+        // Need a consistent way to monitor the heap for these tests to work
+        //[Fact]
+        //public void BeAllocatedOnTheHeapWhenDeclaredAsLocals()
+        //{
+        //    var initialMemoryUsed = GC.GetTotalMemory(true);
 
-            var a = new Point();
-            var b = new Point();
-            var c = new Point();
+        //    var a = new Point();
+        //    var b = new Point();
+        //    var c = new Point();
 
-            var increasedMemoryFootprint = GC.GetTotalMemory(true) - initialMemoryUsed;
+        //    var increasedMemoryFootprint = GC.GetTotalMemory(true) - initialMemoryUsed;
 
-            // expected minimum size increase = (2 x float) x count
-            var minSizeIncrease = 2 * sizeof(float) * 3;
+        //    // expected minimum size increase = (2 x float) x count
+        //    var minSizeIncrease = 2 * sizeof(float) * 3;
 
-            Assert.True(increasedMemoryFootprint > minSizeIncrease);
-        }
+        //    Assert.True(increasedMemoryFootprint > minSizeIncrease);
+        //}
     }
 }

@@ -3,7 +3,7 @@ using Xunit;
 
 namespace MethodTests
 {
-    public class ParametersShould
+    public class ArgumentsShould
     {
         #region Helpers
 
@@ -18,6 +18,12 @@ namespace MethodTests
             public static void ModifyAnIntegerPassedByReference(ref int input)
             {
                 input = input + 5;
+            }
+
+            public static void CantModifyIntegerPassedAsIn(in int input)
+            {
+                // illegal
+                //input = input + 1;
             }
 
             public static void ModifyAPassedReferenceType(MyClass c)

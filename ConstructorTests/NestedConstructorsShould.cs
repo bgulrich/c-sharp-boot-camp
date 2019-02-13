@@ -29,10 +29,8 @@ namespace ConstructorTests
                 I = i;
             }
 
-            private SomeClass(float f)
-            {
-                F = f;
-            }
+            // expression body constructor example
+            private SomeClass(float f) => F = f;
         }
 
         [Fact]

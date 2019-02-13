@@ -44,6 +44,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnumTests", "EnumTests\Enum
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTests", "EventTests\EventTests.csproj", "{6150F375-A215-421C-858B-86F52372FE66}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PropertyTests", "PropertyTests\PropertyTests.csproj", "{3F7C32A8-733D-480D-916D-A438EAC49FF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -404,6 +406,26 @@ Global
 		{6150F375-A215-421C-858B-86F52372FE66}.Release|x64.Build.0 = Release|Any CPU
 		{6150F375-A215-421C-858B-86F52372FE66}.Release|x86.ActiveCfg = Release|Any CPU
 		{6150F375-A215-421C-858B-86F52372FE66}.Release|x86.Build.0 = Release|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Debug|ARM.Build.0 = Debug|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Debug|x64.Build.0 = Debug|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Debug|x86.Build.0 = Debug|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Release|ARM.ActiveCfg = Release|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Release|ARM.Build.0 = Release|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Release|ARM64.Build.0 = Release|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Release|x64.ActiveCfg = Release|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Release|x64.Build.0 = Release|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Release|x86.ActiveCfg = Release|Any CPU
+		{3F7C32A8-733D-480D-916D-A438EAC49FF7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -63,7 +63,7 @@ namespace GenericsTests
         #endregion
 
         [Fact]
-        public void HaveSimilarPerformanceNumbersToDoubleBuffer()
+        public void HaveSimilarPerformanceToDoubleBuffer()
         {
             var tDoubleStart = DateTime.Now;
 
@@ -158,8 +158,8 @@ namespace GenericsTests
             var durationObject = tGenericStart - tobjectStart;
             var durationGeneric = tEnd - tGenericStart;
 
-            // at most 75% of duration
-            Assert.InRange(durationGeneric/durationObject, 0.0, 0.75);
+            // at most 85% of duration
+            Assert.InRange(durationGeneric/durationObject, 0.0, 0.85);
         }
     }
 }

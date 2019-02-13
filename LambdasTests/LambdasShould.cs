@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -118,32 +120,49 @@ namespace LambdaTests
 
         #region Race Conditions
         [Fact]
-        public async Task CreateRaceConditions()
+        public async Task CreateRaceConditionsAsync()
         {
             int i = 0, s = 0;
             var o = new object();
 
+            var incrementorTimes = new ConcurrentBag<TimeSpan>();
+            var synchronizedIncrementorTimes = new ConcurrentBag<TimeSpan>();
+
+            // closure on i will create a race condition if multiple threads call incrementor simultaneously
             Action incrementor = () =>
             {
-                for (int j = 0; j < 1000000; ++j)
+                var start = DateTime.Now;
+
+                for (var j = 0; j < 10000000; ++j)
                 {
                     ++i;
                 }
+
+                incrementorTimes.Add(DateTime.Now - start);
             };
 
             Action synchronizedIncrementor = () =>
             {
-                for (int j = 0; j < 1000000; ++j)
+                var start = DateTime.Now;
+
+                for (var j = 0; j < 10000000; ++j)
                 {
+                    // use a lock to synchronize
                     lock (o) { ++s; }
                 }
+
+                synchronizedIncrementorTimes.Add(DateTime.Now - start);
             };
 
-            await Task.WhenAll(Task.Factory.StartNew(incrementor), Task.Factory.StartNew(incrementor),
-                               Task.Factory.StartNew(synchronizedIncrementor), Task.Factory.StartNew(synchronizedIncrementor));
+            // kick off 3 incrementor tasks and 3 synchronized incrementor tasks
+            await Task.WhenAll(Task.Factory.StartNew(incrementor), Task.Factory.StartNew(incrementor), Task.Factory.StartNew(incrementor),
+                               Task.Factory.StartNew(synchronizedIncrementor), Task.Factory.StartNew(synchronizedIncrementor), Task.Factory.StartNew(synchronizedIncrementor));
 
-            Assert.NotEqual(2000000, i);
-            Assert.Equal(2000000, s);
+            Assert.NotEqual(30000000, i);
+            Assert.Equal(30000000, s);
+
+            // at least double run time for synchronized version (thread safety isn't free!)
+            Assert.InRange(synchronizedIncrementorTimes.Average(t => t.TotalSeconds) / incrementorTimes.Average(t => t.TotalSeconds), 2.0, 100);
         }
 
         #endregion
