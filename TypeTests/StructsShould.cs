@@ -22,6 +22,12 @@ namespace TypeTests
         private interface IReadWritePoint : IReadOnlyPoint, IWriteOnlyPoint
         { }
 
+        private struct Point : IReadWritePoint
+        {
+            public float X { get; set; }
+            public float Y { get; set; }
+        }
+
         private readonly struct Point_ReadOnly : IReadOnlyPoint // illegal -> , IWriteOnlyPoint, IReadWritePoint
         {
             public float X { get; } // illegal -> set; }
@@ -48,6 +54,18 @@ namespace TypeTests
 
             // illegal
             // p.X = 10;
+        }
+
+        [Fact]
+        public void SetAndGetPropertiesCorrectly()
+        {
+            var p = new Point();
+
+            p.X = 5;
+            p.Y = 6;
+
+            Assert.Equal(5, p.X);
+            Assert.Equal(6, p.Y);
         }
 
         // Need a consistent way to monitor the heap for these tests to work
