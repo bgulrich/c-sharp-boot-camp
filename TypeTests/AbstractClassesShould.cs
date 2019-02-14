@@ -26,6 +26,13 @@ namespace TypeTests
         #endregion
 
         [Fact]
+        public void NotBeInstantiatable()
+        {
+            // I can't do this
+            //var wb = new WorkerBase();
+        }
+
+        [Fact]
         public void BeAssignableFromDerivedTypes()
         {
             var worker = new Worker();
@@ -38,5 +45,7 @@ namespace TypeTests
 
             Assert.Equal(1, workerBase.WorkIterations);
         }
+
+        
     }
 }

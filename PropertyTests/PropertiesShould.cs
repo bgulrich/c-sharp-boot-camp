@@ -11,12 +11,14 @@ namespace PropertyTests
         private interface IReadOnlyPoint
         {
             float X { get; }
+            float Y { get; }
         }
 
         // or setter...
         private interface IWriteOnlyPoint
         {
             float X { set; }
+            float Y { set; }
         }
 
         // or both.
@@ -38,6 +40,13 @@ namespace PropertyTests
 
             // expression body property (read-only)
             public float X => _x;
+            public float Y { get; }
+
+            public PointStruct(float x, float y)
+            {
+                _x = x;
+                Y = y;
+            }
         }
 
         // or classes.
@@ -45,7 +54,7 @@ namespace PropertyTests
         {
             // public float X { get; set; }
 
-            // backer + expresion body accessors
+            // backer + expression body accessors
             private float _x;
 
             public float X
@@ -53,6 +62,8 @@ namespace PropertyTests
                 get => _x;
                 set => _x = value;
             }
+
+            public float Y { get; set; }
         }
 
         // sometimes, you can confuse your user
@@ -60,16 +71,24 @@ namespace PropertyTests
         {
             // marked as read-only, but public setter makes it read/write
             public float X { get; set; }
+            public float Y { get; set; }
         }
-
-
         #endregion
 
 
         [Fact]
-        public void Test1()
+        public void GetAndSetValuesAsExpected()
         {
+            var pc = new PointClass();
 
+            Assert.Equal(default(float), pc.X);
+            Assert.Equal(default(float), pc.Y);
+
+            pc.X = 659.234f;
+            pc.Y = -565.654f;
+
+            Assert.Equal(659.234f, pc.X);
+            Assert.Equal(-565.654f, pc.Y);
         }
     }
 }

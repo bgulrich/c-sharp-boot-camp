@@ -20,7 +20,7 @@ namespace DelegateTests
                                                    It.Is<int>(i => i == inputInt)))
                           .Verifiable();
 
-            // Func<string, int> del = _mockInterface.Object.CountLetters;
+            // Action<string, int> del = _mockInterface.Object.SomeAction;
             // OR
             var del = new Action<string, int>(_mockInterface.Object.SomeAction);
 

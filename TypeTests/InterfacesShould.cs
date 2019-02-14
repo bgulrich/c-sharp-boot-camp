@@ -14,14 +14,14 @@ namespace TypeTests
             void DoSomeWork();
         }
 
-        private interface IExplicitWorker
+        private interface IOtherWorker
         {
             void DoSomeWork();
 
             void ResetWorkCount();
         }
 
-        private class Worker : IWorker, IExplicitWorker
+        private class Worker : IWorker, IOtherWorker
         {
             public int WorkIterations { get; private set; }
             public int OtherWorkIterations { get; private set; }
@@ -31,14 +31,14 @@ namespace TypeTests
                 WorkIterations++;
             }
 
-            void IExplicitWorker.DoSomeWork()
+            void IOtherWorker.DoSomeWork()
             {
                 DoSomeWork();
                 DoSomeWork();
                 OtherWorkIterations++;
             }
 
-            void IExplicitWorker.ResetWorkCount()
+            void IOtherWorker.ResetWorkCount()
             {
                 OtherWorkIterations = 0;
             }
@@ -79,10 +79,10 @@ namespace TypeTests
 
             Assert.Equal(1, worker.WorkIterations);
 
-            IExplicitWorker iExplicitWorker = worker;
+            IOtherWorker iOtherWorker = worker;
 
-            // call IExplicitWorker's DoSomeWork method
-            iExplicitWorker.DoSomeWork();
+            // call IOtherWorker's DoSomeWork method
+            iOtherWorker.DoSomeWork();
 
             Assert.Equal(3, worker.WorkIterations);
             Assert.Equal(1, worker.OtherWorkIterations);
@@ -91,7 +91,7 @@ namespace TypeTests
             //worker.ResetWorkCount();
 
             // reset explicit work count
-            iExplicitWorker.ResetWorkCount();
+            iOtherWorker.ResetWorkCount();
 
             Assert.Equal(3, worker.WorkIterations);
             Assert.Equal(0, worker.OtherWorkIterations);
