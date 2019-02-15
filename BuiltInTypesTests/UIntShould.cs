@@ -15,28 +15,22 @@ namespace BuiltInTypesTests
         }
 
         [Fact]
-        public void ReturnIfSomeUIntIsInRange()
+        public void CheckIfSomeUIntIsInRange()
         {
-            var someUint = new UInt32[]
-                           {
-                               0,  1000000000,
-                           };
+            uint someUint = 1000000000;
 
-            Assert.InRange(someUint[0], UInt32.MinValue, UInt32.MaxValue);
-            Assert.InRange(someUint[0], UInt32.MinValue, UInt32.MaxValue);
+            Assert.InRange(someUint, UInt32.MinValue, UInt32.MaxValue);
 
 
         }
 
         [Fact]
-        public void ReturnIfUIntIsOutOfRange()
+        public void CheckIfUIntIsOutOfRange()
         {
-            var someUint = new UInt32[]
-                           {
-                              500000000,
-                           };
+            uint someUint = 500000000;
+                           ;
             ;
-            Assert.NotInRange( someUint[0] * (-1), UInt32.MinValue, UInt32.MaxValue);
+            Assert.NotInRange( someUint * (-1), UInt32.MinValue, UInt32.MaxValue);
 
 
         }
@@ -44,13 +38,11 @@ namespace BuiltInTypesTests
         [Fact]
         public void ThrowOverflowExceptionIfUIntIsOutOfRange()
         {
-            var someUint = new UInt32[]
-                           {
-                               900000000,
-                           };
-            ;
-            // well there is definitely overflow but not sure how to catch it.
-            Assert.ThrowsAny<OverflowException>(() => someUint[0] * (100000));
+            uint someUint = 900000000;
+
+            // well there is definitely overflow but not sure how to catch it. does not throw overflow must be casting automatically or throwing away the bits?
+
+            Assert.ThrowsAny<OverflowException>(() => (short)(someUint * Math.Pow(10, 10000)));
 
 
         }
