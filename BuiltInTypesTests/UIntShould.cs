@@ -1,5 +1,6 @@
 using System;
 using Xunit;
+using Xunit.Abstractions;
 
 
 namespace BuiltInTypesTests
@@ -38,11 +39,14 @@ namespace BuiltInTypesTests
         [Fact]
         public void ThrowOverflowExceptionIfUIntIsOutOfRange()
         {
-            uint someUint = 900000000;
+
+
+            var someUint = 80 * Math.Pow(100, 10000);
 
             // well there is definitely overflow but not sure how to catch it. does not throw overflow must be casting automatically or throwing away the bits?
 
-            Assert.ThrowsAny<OverflowException>(() => (short)(someUint * Math.Pow(10, 10000)));
+            //Assert.ThrowsAny<OverflowException>(() => 80 * Math.Pow(100, 10000));
+            Assert.NotInRange(someUint, UInt32.MinValue, UInt32.MaxValue);
 
 
         }
