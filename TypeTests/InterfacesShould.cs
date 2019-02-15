@@ -55,6 +55,9 @@ namespace TypeTests
 
             Assert.Equal(0, worker.WorkIterations);
 
+            // this is illegal
+            // var iWorker = new IWorker();
+
             IWorker iWorker = worker;
 
             iWorker.DoSomeWork();

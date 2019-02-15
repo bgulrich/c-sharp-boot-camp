@@ -39,7 +39,10 @@ namespace TypeTests
 
             for (float i = 0; i < iterations; ++i)
             {
-                var o = (object)new Point(i, i);
+                // explicit cast
+                // var o = (object)new Point(i, i);
+                // implicit
+                object o = new Point(i, i);
                 var p = (Point)o;
             }
 

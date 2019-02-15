@@ -1,5 +1,5 @@
 # Walmart DFW C# Editor Config File
-# Version 0.1 (please increment me if you edit anything below)
+# Version 0.2 (please increment me if you edit anything below)
 # settings based on: .NET Core Language EditorConfig: https://github.com/dotnet/corefx/blob/master/.editorconfig
 
 ###############################
@@ -157,21 +157,21 @@ dotnet_naming_style.interface_style.capitalization  = pascal_case
 dotnet_naming_style.interface_style.required_prefix = I
 dotnet_naming_rule.interface_rule.style             = interface_style
 dotnet_naming_rule.interface_rule.severity          = error
-dotnet_naming_rule.interfaces_rule.symbols          = interfaces
+dotnet_naming_rule.interface_rule.symbols           = interfaces
 dotnet_naming_symbols.interfaces.applicable_kinds   = interface
 
 # Types - PascalCase
-dotnet_naming_rule.types_rule.style            = pascal_case_style
-dotnet_naming_rule.types_rule.severity         = error
-dotnet_naming_rule.types_rule.symbols          = types
-dotnet_naming_symbols.types.applicable_kinds   = class,struct,enum,delegate
+dotnet_naming_rule.types_rule.style          = pascal_case_style
+dotnet_naming_rule.types_rule.severity       = error
+dotnet_naming_rule.types_rule.symbols        = types
+dotnet_naming_symbols.types.applicable_kinds = class,struct,enum,delegate
 
 # async methods - PascalCase + end in "Async"
 dotnet_naming_style.async_method_style.capitalization  = pascal_case
 dotnet_naming_style.async_method_style.required_suffix = Async
-dotnet_naming_rule.async_methods_rule.style            = async_method_style
-dotnet_naming_rule.async_methods_rule.severity         = error
-dotnet_naming_rule.async_methods_rule.symbols          = async_methods
+dotnet_naming_rule.async_method_rule.style             = async_method_style
+dotnet_naming_rule.async_method_rule.severity          = error
+dotnet_naming_rule.async_method_rule.symbols           = async_methods
 dotnet_naming_symbols.async_methods.applicable_kinds   = method
 dotnet_naming_symbols.async_methods.required_modifiers = async
 
@@ -188,9 +188,9 @@ dotnet_naming_rule.parameter_rule.symbols         = parameters
 dotnet_naming_symbols.parameters.applicable_kinds = parameter
 
 # Constant fields - PascalCase
-dotnet_naming_rule.constant_fields_rule.style            = pascal_case_style
-dotnet_naming_rule.constant_fields_rule.severity         = error
-dotnet_naming_rule.constant_fields_rule.symbols          = constant_fields
+dotnet_naming_rule.constant_field_rule.style             = pascal_case_style
+dotnet_naming_rule.constant_field_rule.severity          = error
+dotnet_naming_rule.constant_field_rule.symbols           = constant_fields
 dotnet_naming_symbols.constant_fields.applicable_kinds   = field
 dotnet_naming_symbols.constant_fields.required_modifiers = const
 
@@ -203,16 +203,13 @@ dotnet_naming_rule.member_field_rule.symbols           = member_fields
 dotnet_naming_symbols.member_fields.applicable_kinds   = field
 
 # Properties - PascalCase
-dotnet_naming_rule.properties_rule.style            = pascal_case_style
-dotnet_naming_rule.properties_rule.severity         = error
-dotnet_naming_rule.properties_rule.symbols          = properties
-dotnet_naming_symbols.properties.applicable_kinds   = property
+dotnet_naming_rule.property_rule.style            = pascal_case_style
+dotnet_naming_rule.property_rule.severity         = error
+dotnet_naming_rule.property_rule.symbols          = properties
+dotnet_naming_symbols.properties.applicable_kinds = property
 
 # Events - PascalCase
-dotnet_naming_rule.events_rule.style            = pascal_case_style
-dotnet_naming_rule.events_rule.severity         = error
-dotnet_naming_rule.events_rule.symbols          = events
-dotnet_naming_symbols.events.applicable_kinds   = event
-
-
-
+dotnet_naming_rule.event_rule.style            = pascal_case_style
+dotnet_naming_rule.event_rule.severity         = error
+dotnet_naming_rule.event_rule.symbols          = events
+dotnet_naming_symbols.events.applicable_kinds  = event

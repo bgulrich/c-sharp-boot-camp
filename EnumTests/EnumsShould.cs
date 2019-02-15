@@ -35,7 +35,7 @@ namespace EnumTests
         #region General Use
 
         [Fact]
-        public void SupportZerBasedIntegerCastByDefault()
+        public void SupportZeroBasedIntegerCastByDefault()
         {
             Assert.Equal(0, (int)State.Unknown);
             Assert.Equal(1, (int)State.Initializing);
