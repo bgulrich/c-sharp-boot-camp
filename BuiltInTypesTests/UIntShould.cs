@@ -2,7 +2,6 @@ using System;
 using Xunit;
 using Xunit.Abstractions;
 
-
 namespace BuiltInTypesTests
 {
     public class UIntShould

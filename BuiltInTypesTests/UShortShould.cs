@@ -1,7 +1,6 @@
 using System;
 using Xunit;
 
-
 namespace BuiltInTypesTests
 {
     public class UShortShould
@@ -47,7 +46,5 @@ namespace BuiltInTypesTests
 
             Assert.Equal(default(ushort), parsed);
         }
-
-
     }
 }
