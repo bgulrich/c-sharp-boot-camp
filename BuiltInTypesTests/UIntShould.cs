@@ -7,49 +7,45 @@ namespace BuiltInTypesTests
 {
     public class UIntShould
     {
-
         [Fact]
-        public void BeOfTheSameTypesAsTheirAliases()
+        public void BeOfTheSameTypesAsUInt32()
         {
-            Assert.Equal(typeof(uint),  typeof(UInt32));
-
+            Assert.Equal(typeof(uint), typeof(UInt32));
         }
 
         [Fact]
-        public void CheckIfSomeUIntIsInRange()
+        public void ThrowOverflowExceptionIfCheckedOperationCausesUIntIsOutOfRange()
         {
-            uint someUint = 1000000000;
+            var someUint = uint.MaxValue;
 
-            Assert.InRange(someUint, UInt32.MinValue, UInt32.MaxValue);
+            Assert.Throws<OverflowException>(() => checked(someUint += 1));
 
-
+            // value doesn't move
+            Assert.Equal(uint.MaxValue, someUint);
         }
 
         [Fact]
-        public void CheckIfUIntIsOutOfRange()
+        public void ParseValidUintValue()
         {
-            uint someUint = 500000000;
-                           ;
-            ;
-            Assert.NotInRange( someUint * (-1), UInt32.MinValue, UInt32.MaxValue);
-
-
+            var input = "568";
+            Assert.Equal((uint)568, uint.Parse(input));
         }
 
         [Fact]
-        public void ThrowOverflowExceptionIfUIntIsOutOfRange()
+        public void ThrowFormatExceptionWhenParsingInvalidString()
         {
-
-
-            var someUint = 80 * Math.Pow(100, 10000);
-
-            // well there is definitely overflow but not sure how to catch it. does not throw overflow must be casting automatically or throwing away the bits?
-
-            //Assert.ThrowsAny<OverflowException>(() => 80 * Math.Pow(100, 10000));
-            Assert.NotInRange(someUint, UInt32.MinValue, UInt32.MaxValue);
-
-
+            var input = "blah";
+            Assert.Throws<FormatException>(() => uint.Parse(input));
         }
 
+        [Fact]
+        public void FailToTryParseInvalidString()
+        {
+            var input = "fifty five";
+
+            Assert.False(uint.TryParse(input, out uint parsed));
+
+            Assert.Equal(default(uint), parsed);
+        }
     }
 }
