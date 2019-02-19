@@ -124,7 +124,7 @@ namespace TypeTests
             // assign the same reference
             var second = first;
 
-            Assert.False(object.ReferenceEquals(first, second));
+            Assert.True(object.ReferenceEquals(first, second));
         }
 
         [Fact]
@@ -136,7 +136,7 @@ namespace TypeTests
             // assign the same reference
             var second = first;
 
-            Assert.False(object.ReferenceEquals(first, second));
+            Assert.True(object.ReferenceEquals(first, second));
         }
 
         #endregion

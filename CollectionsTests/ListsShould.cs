@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -71,6 +72,64 @@ namespace CollectionTests
         {
             var list = new List<int> { 1, 2, 3 };
             Assert.Throws<ArgumentOutOfRangeException>(() => { var y = list[10]; });
+        }
+
+        #endregion
+
+        #region Capacity
+
+        [Fact]
+        public void GrowInCapacityAsElementsAdded()
+        {
+            // start with a size of 2
+            var list = new List<int>(2);
+
+            Assert.Equal(2, list.Capacity);
+
+            var previousCapacity = 2;
+            var capacityBumps = new List<(int index, int newCapacity)>();
+
+            for (var i = 0; i < 100; ++i)
+            {
+                list.Add(i);
+
+                if (list.Capacity != previousCapacity)
+                {
+                    capacityBumps.Add((i, list.Capacity));
+                    previousCapacity = list.Capacity;
+                }
+            }
+
+            // expecting at least two capacity bumps to handle 100 elements
+            // probably 6 if the capacity doubles each time
+            Assert.True(capacityBumps.Count > 2);
+        }
+
+        [Fact]
+        public void HaveSlowerAdditionsAtCapacityBoundries()
+        {
+            // start with a size of 2
+            var list = new List<int>();
+
+            var normalAddTimes = new List<TimeSpan>();
+            var capacityAddTimes = new List<TimeSpan>();
+
+            for (var i = 0; i < 100000; ++i)
+            {
+                var targetList = list.Count == list.Capacity ? capacityAddTimes : normalAddTimes;
+
+                var start = DateTime.Now;
+
+                list.Add(i);
+
+                targetList.Add(DateTime.Now - start);
+            }
+
+            // expecting much slower capacity adds on average (x10)
+            Assert.InRange(capacityAddTimes.Average(t => t.TotalMilliseconds) / normalAddTimes.Average(t => t.TotalMilliseconds), 10, 200);
+            // expecting much slower last capacity add than first (x10)
+            Assert.InRange(capacityAddTimes.Last() / capacityAddTimes.First(), 10, 200);
+
         }
 
         #endregion
