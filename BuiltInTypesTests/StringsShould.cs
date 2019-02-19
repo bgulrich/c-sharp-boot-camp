@@ -40,5 +40,34 @@ namespace BuiltInTypesTests
             var slowDown = stringTime.TotalSeconds / stringBuilderTime.TotalSeconds;
             Assert.InRange(slowDown, 100, double.MaxValue);
         }
+
+        [Fact]
+        public void BeAnArrayOfCharacters()
+        {
+            var string1 = "Walmart Rocks!";
+            var char_array = new char[] { 'W', 'a', 'l', 'm', 'a', 'r', 't', ' ', 'R', 'o', 'c', 'k', 's', '!' };
+            //Assert they are equal
+            Assert.Equal(string1,char_array);
+        }
+        [Fact]
+        public void BeAbletoBeDeclaredEitherWay()
+        {
+            var string1 = "Walmart Rocks!";
+            var string2 = new string("Walmart Rocks!");
+
+            Assert.Equal(string1, string2);
+        }
+        [Theory]
+        [InlineData("Walmart")]
+        [InlineData("Rocks")]
+        [InlineData("Walmart Rocks!!")]
+        public void BeInheritedFromObject(string inputString)
+        {
+            object stringObject = (object)inputString;
+
+            Assert.Equal(stringObject, inputString);
+
+        }
+        
     }
 }
