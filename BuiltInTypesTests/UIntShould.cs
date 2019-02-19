@@ -25,7 +25,7 @@ namespace BuiltInTypesTests
         }
 
         [Fact]
-        public void ParseValidUintValue()
+        public void ParseValidString()
         {
             var input = "568";
             Assert.Equal((uint)568, uint.Parse(input));

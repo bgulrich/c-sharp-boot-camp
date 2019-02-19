@@ -8,31 +8,44 @@ namespace BuiltInTypesTests
     {
 
         [Fact]
-        public void BeOfTheSameTypesAsTheirAliases()
+        public void BeOfTheSameTypesAsUInt16()
         {
             Assert.Equal(typeof(ushort),  typeof(UInt16));
-
         }
 
         [Fact]
-        public void ReturnIfSomeUShortIsInRange()
+        public void ThrowOverflowExceptionIfCheckedOperationCausesUIntIsOutOfRange()
         {
-            var someUshort = 50000;
+            var someUshort = ushort.MaxValue;
 
-            Assert.InRange(someUshort, UInt16.MinValue, UInt16.MaxValue);
+            Assert.Throws<OverflowException>(() => checked(someUshort += 1));
 
-
+            // value doesn't move
+            Assert.Equal(ushort.MaxValue, someUshort);
         }
 
         [Fact]
-        public void ReturnIfUShortIsOutOfRange()
+        public void ParseValidString()
         {
-            var someUshort = 50000;
+            var input = "568";
+            Assert.Equal((ushort)568, ushort.Parse(input));
+        }
 
-            ;
-            Assert.NotInRange( someUshort * (-1), UInt16.MinValue, UInt16.MaxValue);
+        [Fact]
+        public void ThrowFormatExceptionWhenParsingInvalidString()
+        {
+            var input = "blah";
+            Assert.Throws<FormatException>(() => ushort.Parse(input));
+        }
 
+        [Fact]
+        public void FailToTryParseInvalidString()
+        {
+            var input = "fifty five";
 
+            Assert.False(ushort.TryParse(input, out ushort parsed));
+
+            Assert.Equal(default(ushort), parsed);
         }
 
 
