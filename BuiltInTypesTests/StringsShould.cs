@@ -47,16 +47,18 @@ namespace BuiltInTypesTests
             var string1 = "Walmart Rocks!";
             var char_array = new char[] { 'W', 'a', 'l', 'm', 'a', 'r', 't', ' ', 'R', 'o', 'c', 'k', 's', '!' };
             //Assert they are equal
-            Assert.Equal(string1,char_array);
+            Assert.Equal(string1, char_array);
         }
+
         [Fact]
-        public void BeAbletoBeDeclaredEitherWay()
+        public void BeAbleToBeDeclaredEitherWay()
         {
             var string1 = "Walmart Rocks!";
             var string2 = new string("Walmart Rocks!");
 
             Assert.Equal(string1, string2);
         }
+
         [Theory]
         [InlineData("Walmart")]
         [InlineData("Rocks")]
@@ -64,10 +66,8 @@ namespace BuiltInTypesTests
         public void BeInheritedFromObject(string inputString)
         {
             object stringObject = (object)inputString;
-
             Assert.Equal(stringObject, inputString);
 
         }
-        
     }
 }

@@ -19,6 +19,7 @@ namespace OperatorTests
             }
         }
 
+
         #endregion
 
         #region Accessing Members
@@ -70,7 +71,6 @@ namespace OperatorTests
         #endregion
 
         #region thread-safe delegates
-
         [Fact]
         public void AllowThreadSafeDelegateInvocations()
         {

@@ -10,9 +10,18 @@ namespace OperatorTests
     {
         #region Helpers
 
-        private interface ISomeInterface { }
+        private interface ISomeInterface
+        {
+            bool SomeMethod();
+        }
 
-        private class SomeBaseClass : ISomeInterface { }
+        private class SomeBaseClass : ISomeInterface
+        {
+            bool ISomeInterface.SomeMethod()
+            {
+                return true;
+            }
+        }
 
         private class SomeDerivedClass : SomeBaseClass { }
 
@@ -26,7 +35,7 @@ namespace OperatorTests
         }
 
         [Fact]
-        public void ReturnNullIfTypeIsIncompatibleWithInstance()
+        public void ReturnFalseIfTypeIsIncompatibleWithInstance()
         {
             var sbc = new SomeBaseClass();
             Assert.False(sbc is SomeDerivedClass);
@@ -47,6 +56,17 @@ namespace OperatorTests
 
             // sbc is declared here, but compiler says it may not be initialized
             // Assert.NotNull(sbc);
+
+            if (sdc is ISomeInterface)
+            {
+                var i = (ISomeInterface)sdc;
+                i.SomeMethod();
+            }
+            
+            if (sdc is ISomeInterface someInterface)
+            {
+                someInterface.SomeMethod();
+            }
 
             // instead of
             if (sdc is SomeBaseClass)

@@ -10,17 +10,17 @@ namespace OperatorTests
         [Fact]
         public void ReturnLeftValueIfExpressionIsTrue()
         {
-            DateTime? dt = DateTime.Now;
+            var boolean = true;
 
-            Assert.Equal("Sometime", dt.HasValue ? "Sometime" : "Never");
+            Assert.Equal("Sometime", boolean ? "Sometime" : "Never");
         }
 
         [Fact]
         public void ReturnRightValueIfExpressionIsFalse()
         {
-            DateTime? dt = null;
+            var boolean = true;
 
-            Assert.Equal("Never", dt.HasValue ? "Sometime" : "Never");
+            Assert.Equal("Never", boolean ? "Sometime" : "Never");
         }
     }
 }

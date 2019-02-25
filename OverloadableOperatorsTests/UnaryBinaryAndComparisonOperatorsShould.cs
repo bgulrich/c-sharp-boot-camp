@@ -69,15 +69,15 @@ namespace OverloadableOperatorsTests
             public CarbohydrateInfo Carbohydrates { get; private set; }
             public FatInfo Fat { get; private set; }
 
-            public static NutritionInfo operator +(NutritionInfo mc, MealComponent mi)
+            public static NutritionInfo operator +(NutritionInfo ni, MealComponent mc)
             {
                 return new NutritionInfo
                 {
-                    Calories = mc.Calories + mi.Calories,
-                    Carbohydrates = mc.Carbohydrates + mi.Carbohydrates,
-                    Fat = mc.Fat + mi.Fat,
-                    ProteinGrams = mc.ProteinGrams + mi.ProteinGrams,
-                    SodiumMilligrams = mc.SodiumMilligrams + mi.SodiumMilligrams
+                    Calories = ni.Calories + mc.Calories,
+                    Carbohydrates = ni.Carbohydrates + mc.Carbohydrates,
+                    Fat = ni.Fat + mc.Fat,
+                    ProteinGrams = ni.ProteinGrams + mc.ProteinGrams,
+                    SodiumMilligrams = ni.SodiumMilligrams + mc.SodiumMilligrams
                 };
             }
 
@@ -178,12 +178,12 @@ namespace OverloadableOperatorsTests
 
             public static bool operator >=(FatInfo left, FatInfo right)
             {
-                return left.TotalGrams > right.TotalGrams;
+                return left.TotalGrams >= right.TotalGrams;
             }
 
             public static bool operator <=(FatInfo left, FatInfo right)
             {
-                return left.TotalGrams < right.TotalGrams;
+                return left.TotalGrams <= right.TotalGrams;
             }
             #endregion
 

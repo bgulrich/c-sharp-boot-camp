@@ -11,7 +11,9 @@ namespace OperatorTests
 
         private class SomeBaseClass { }
 
-        private class SomeDerivedClass : SomeBaseClass { }
+        private interface SomeInterface {}
+
+        private class SomeDerivedClass : SomeBaseClass, SomeInterface { }
 
         #endregion
 
@@ -19,8 +21,14 @@ namespace OperatorTests
         public void SucceedIfTypeIsCompatibleWithInstance()
         {
             var sdc = new SomeDerivedClass();
+
+            // cast to parent class
             var sbc = (SomeBaseClass)sdc;
             Assert.NotNull(sbc);
+
+            // cast to implemented interface
+            var i = (SomeInterface)sdc;
+            Assert.NotNull(i);
         }
 
         [Fact]
@@ -28,6 +36,9 @@ namespace OperatorTests
         {
             var sbc = new SomeBaseClass();
             Assert.Throws<InvalidCastException>(() => { var sdc = (SomeDerivedClass)sbc; });
+
+            Assert.Throws<InvalidCastException>(() => { var i = (SomeInterface)sbc; });
+
         }
 
         [Fact]

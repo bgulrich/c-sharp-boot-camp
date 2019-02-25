@@ -36,7 +36,7 @@ namespace EqualityTests
             // 2. Implement IEquatable<T>
             public bool Equals(Point other)
             {
-                return (X == other.X) && (Y == other.Y);
+                return (this.X == other.X) && (Y == other.Y);
             }
 
             // 3. Optional - overload == and != operators

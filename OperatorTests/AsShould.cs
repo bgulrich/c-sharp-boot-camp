@@ -22,6 +22,8 @@ namespace OperatorTests
             var sbc = sdc as SomeBaseClass;
 
             Assert.NotNull(sbc);
+
+            // have to check for null before using
         }
 
         [Fact]
