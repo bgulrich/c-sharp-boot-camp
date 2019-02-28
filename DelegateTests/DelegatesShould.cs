@@ -19,11 +19,6 @@ namespace DelegateTests
             }
         }
 
-        public DelegatesShould()
-        {
-
-        }
-
         [Fact]
         public void PassVariableToMethod()
         {

@@ -133,5 +133,28 @@ namespace CollectionTests
         }
 
         #endregion
+
+        #region Read-only
+        [Fact]
+        public void SupportReadOnlyWrapper()
+        {
+            var list = new List<int> { 1, 2, 3 };
+
+            // wrapped in ReadOnlyCollection<T> which doesn't allow access to underlying list
+            // and implements IList but throws exceptions if modification is attempted
+            var readOnlyList = list.AsReadOnly();
+            // or
+            // var readOnlyList = new ReadOnlyCollection<int>(list);
+
+            Assert.Equal(3, readOnlyList.Count);
+            Assert.Throws<NotSupportedException>(() => (readOnlyList as IList<int>).Add(5));
+            Assert.Throws<NotSupportedException>(() => (readOnlyList as IList<int>).RemoveAt(0));
+
+            // original list modifications reflected in read-only version
+            list.Add(4);
+            list.Add(5);
+            Assert.Equal(5, readOnlyList.Count);
+        }
+        #endregion
     }
 }
