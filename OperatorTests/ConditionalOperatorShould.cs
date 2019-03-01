@@ -18,7 +18,7 @@ namespace OperatorTests
         [Fact]
         public void ReturnRightValueIfExpressionIsFalse()
         {
-            var boolean = true;
+            var boolean = false;
 
             Assert.Equal("Never", boolean ? "Sometime" : "Never");
         }

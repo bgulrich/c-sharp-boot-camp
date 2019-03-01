@@ -174,25 +174,48 @@ namespace CollectionTests
         }
 
         [Fact]
-        public void ThrowInvalidOperationExceptionIfModificationAttemptedInForeachLoop()
+        public void ThrowInvalidOperationExceptionIfListModificationAttemptedInForeachLoop()
         {
-            var days = new List<string> { "Sunday", "Monday", "Tuesday", "Wednesday", "Friday", "Saturday"};
+            var days = new List<string> { "Sunday", "Monday", "Tuesday", "Wednesday", null, "Friday", "Saturday"};
             int index = 0;
 
+            // modification not allowed for List<T> and most other collection types, but not all
             Assert.Throws<InvalidOperationException>(() =>
             {
                 foreach (var day in days)
                 {
-                    if (day == "Friday")
+                    if (day == null)
                     {
                         // invalid - foreach iteration variables are read-only (even if they weren't, this wouldn't accomplish the intended goal)
                         // day = "Thursday";
-                        days.Insert(index, "Thursday");
+                        days[index] = "Thursday";
                     }
 
                     ++index;
                 }
             });
+        }
+
+        [Fact]
+        public void AllowModificationOfArrayInForeachLoop()
+        {
+            var days = new string[] { "Sunday", "Monday", "Tuesday", "Wednesday", null, "Friday", "Saturday" };
+            int index = 0;
+
+            // modification of array is allowed since compiler converts it to a for loop
+            foreach (var day in days)
+            {
+                if (day == null)
+                {
+                    // invalid - foreach iteration variables are read-only (even if they weren't, this wouldn't accomplish the intended goal)
+                    // day = "Thursday";
+                    days[index] = "Thursday";
+                }
+
+                ++index;
+            }
+
+            Assert.Equal("Thursday", days[4]);
         }
         #endregion
 

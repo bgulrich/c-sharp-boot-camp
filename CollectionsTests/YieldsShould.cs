@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading;
 using Xunit;
@@ -8,6 +10,81 @@ namespace CollectionTests
 {
     public class YieldsShould
     {
+        #region Helpers
+
+        #region IEnumerable implementing class
+
+        private class DaysOfWeek : IEnumerable<string>
+        {
+            public IEnumerator<string> GetEnumerator()
+            {
+                // instead of implementing separate enumerator class, just yield
+                // return new DaysOfWeekEnumerator();
+
+                yield return "Sunday";
+                yield return "Monday";
+                yield return "Tuesday";
+                yield return "Wednesday";
+                yield return "Thursday";
+                yield return "Friday";
+                yield return "Saturday";
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+        }
+        #endregion
+
+        #region Methods
+        private static class Yields
+        {
+            public static IEnumerable<int> CountTo(int input)
+            {
+                var i = 0;
+
+                while (true)
+                {
+                    if (i < input)
+                        yield return ++i;
+                    else
+                        yield break;
+                }
+            }
+
+            public static IEnumerable<string> GetLines(string filePath)
+            {
+                // read lines one at a time
+                using (var textFile = File.OpenText(filePath))
+                {
+                    string line;
+
+                    while ((line = textFile.ReadLine()) != null)
+                    {
+                        yield return line;
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #endregion
+
+        [Fact]
+        public void EnumerateDaysOfWeek()
+        {
+            var expected = new[] {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+
+            var index = 0;
+
+            foreach (var day in new DaysOfWeek())
+            {
+                Assert.Equal(day, expected[index]);
+                ++index;
+            }
+        }
+
         [Fact]
         public void CountTo()
         {

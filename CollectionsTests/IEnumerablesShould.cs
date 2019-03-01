@@ -47,6 +47,31 @@ namespace CollectionTests
         }
         #endregion
 
+        #region Covariance
+
+        [Fact]
+        public void BeCovariant()
+        {
+            var strings = new List<string> {"s1", "s2"};
+
+            // Illegal - List<T> is not covariant
+            //List<object> stringsAsObjects = strings;
+            // but this is ok, by the way :)
+            //IReadOnlyList<object> stringsAsObjects = strings;
+
+            // and so is this
+            IEnumerable<object> stringsAsObjects = strings;
+
+            int count = 0;
+
+            foreach (var s in stringsAsObjects)
+            {
+                Assert.Equal(strings[count++], s);
+            }
+        }
+
+        #endregion
+
         #region Pitfalls
 
         #region Helpers
