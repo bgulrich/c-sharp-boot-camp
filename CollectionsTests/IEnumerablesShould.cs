@@ -14,23 +14,25 @@ namespace CollectionTests
         /// The compiler does something like this behind the scenes for a foreach loop
         /// </summary>
         [Fact]
-        public void BeEnumeratableExplicitly()
+        public void BeEnumerableExplicitly()
         {
             IEnumerable<int> integers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
             var count = 0;
-            var enumerator = integers.GetEnumerator();
 
-            while(enumerator.MoveNext())
+            using (var enumerator = integers.GetEnumerator())
             {
-                Assert.Equal(++count, enumerator.Current);
+                while (enumerator.MoveNext())
+                {
+                    Assert.Equal(++count, enumerator.Current);
+                }
             }
 
             Assert.Equal(10, count);
         }
 
         [Fact]
-        public void BeEnumeratableWithForeach()
+        public void BeEnumerableWithForeach()
         {
             IEnumerable<int> integers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 

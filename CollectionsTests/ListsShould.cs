@@ -26,22 +26,26 @@ namespace CollectionTests
         public void BeEnumerable()
         {
             var array = new List<int> { 1, 2, 3 };
+            int value = 0;
 
             #region enumerator implementation
-            var enumerator = array.GetEnumerator();
 
-            enumerator.MoveNext();
-            var value = (int)enumerator.Current;
-
-            Assert.Equal(array[0], value);
-
-            int index = 1;
-
-            while (enumerator.MoveNext())
+            using (var enumerator = array.GetEnumerator())
             {
-                Assert.Equal(array[index], enumerator.Current);
-                ++index;
+                enumerator.MoveNext();
+                value = (int)enumerator.Current;
+
+                Assert.Equal(array[0], value);
+
+                int index = 1;
+
+                while (enumerator.MoveNext())
+                {
+                    Assert.Equal(array[index], enumerator.Current);
+                    ++index;
+                }
             }
+
             #endregion
 
             #region foreach implementation

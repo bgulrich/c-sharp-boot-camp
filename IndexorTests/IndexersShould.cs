@@ -16,16 +16,17 @@ namespace IndexerTests
             {
                 get
                 {
-                    var enumerator = GetEnumerator();
-
-                    do
+                    using (var enumerator = GetEnumerator())
                     {
-                        enumerator.MoveNext();
-                        --index;
+                        do
+                        {
+                            enumerator.MoveNext();
+                            --index;
 
-                    } while (index > -1);
+                        } while (index > -1);
 
-                    return enumerator.Current;
+                        return enumerator.Current;
+                    }
                 }
             }
 

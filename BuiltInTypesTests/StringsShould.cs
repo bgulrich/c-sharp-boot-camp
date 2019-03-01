@@ -42,16 +42,23 @@ namespace BuiltInTypesTests
         }
 
         [Fact]
-        public void BeAnArrayOfCharacters()
+        public void ImplementIEnumerableOfChar()
         {
-            var string1 = "Walmart Rocks!";
-            var char_array = new char[] { 'W', 'a', 'l', 'm', 'a', 'r', 't', ' ', 'R', 'o', 'c', 'k', 's', '!' };
-            //Assert they are equal
-            Assert.Equal(string1, char_array);
+            var s = "Walmart Rocks!";
+            var chars = new char[] { 'W', 'a', 'l', 'm', 'a', 'r', 't', ' ', 'R', 'o', 'c', 'k', 's', '!' };
+
+            Assert.NotNull(s.GetEnumerator());
+
+            int count = 0;
+
+            foreach (var c in s)
+            {
+                Assert.Equal(chars[count++], c);
+            }
         }
 
         [Fact]
-        public void BeAbleToBeDeclaredEitherWay()
+        public void BeDeclarableAsAnInlineCostantOrUsingAConstructor()
         {
             var string1 = "Walmart Rocks!";
             var string2 = new string("Walmart Rocks!");
@@ -63,7 +70,7 @@ namespace BuiltInTypesTests
         [InlineData("Walmart")]
         [InlineData("Rocks")]
         [InlineData("Walmart Rocks!!")]
-        public void BeInheritedFromObject(string inputString)
+        public void BeDerivedFromObject(string inputString)
         {
             object stringObject = (object)inputString;
             Assert.Equal(stringObject, inputString);
