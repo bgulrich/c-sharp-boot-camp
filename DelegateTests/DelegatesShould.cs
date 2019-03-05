@@ -27,7 +27,6 @@ namespace DelegateTests
             _mockInterface.Setup(i => i.CountLetters(It.Is<string>(s => s == input)))
                           .Verifiable();
 
-
             //CountLettersDelegate d = _mockInterface.Object.CountLetters;
             // OR 
             var del = new CountLettersDelegate(_mockInterface.Object.CountLetters);
@@ -62,6 +61,16 @@ namespace DelegateTests
             var input = "Howdy!!!";
 
             Assert.Equal(input.Length, del(input));
+        }
+
+        [Fact]
+        public void WorkWithAnonymousMethodsToo()
+        {
+            CountLettersDelegate del = (string s) => { return s.Length * s.Length; };
+
+            var input = "Howdy!!!";
+
+            Assert.Equal(input.Length * input.Length, del(input));
         }
     }
 }

@@ -8,16 +8,6 @@ namespace BuiltInTypesTests
     public class ByteShould
     {
         [Theory]
-        [InlineData(20,20)]
-        [InlineData(40,40)]
-        [InlineData(202,202)]
-        [InlineData(255,255)]
-        public void BeSameAsUnsigned8BitInteger(byte b, int i)
-        {
-            Assert.Equal(b, i);
-        }
-
-        [Theory]
         [InlineData(255,1,0)]
         [InlineData(5,255,4)]
         [InlineData(byte.MaxValue,byte.MaxValue,254)]
@@ -27,10 +17,11 @@ namespace BuiltInTypesTests
         }
 
         [Fact]
-        public void ThrowOverflowExceptionIfMoreThan255()
+        public void ThrowOverflowExceptionCheckedOperationOverflows()
         {
-            int number = Int32.MaxValue;
-            Assert.Throws<OverflowException>(()=>Convert.ToByte(number));
+            byte b = byte.MaxValue;
+
+            Assert.Throws<OverflowException>(()=> checked(b = b++));
         }
 
     }

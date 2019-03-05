@@ -74,7 +74,6 @@ namespace BuiltInTypesTests
         {
             object stringObject = (object)inputString;
             Assert.Equal(stringObject, inputString);
-
         }
     }
 }

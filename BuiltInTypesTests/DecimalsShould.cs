@@ -10,7 +10,7 @@ namespace BuiltInTypesTests
         [Fact]
         public void HaveSuffixOfM()
         {
-            decimal proper = 3.14159m;
+            var proper = 3.14159m;
             // Illegal
             // decimal improper = 3.14159;
 
@@ -32,7 +32,7 @@ namespace BuiltInTypesTests
         public void AllowCurrencyFormating()
         {
             decimal a = 19.99m;
-            Assert.Equal("$19.99",a.ToString("C2"));
+            Assert.Equal("$19.99", a.ToString("C2"));
 
             // Rounds up when decimal place exceeds cent
             a = 0.9999m;

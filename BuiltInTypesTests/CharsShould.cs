@@ -78,5 +78,14 @@ namespace BuiltInTypesTests
             Assert.Equal(input,stringValue.ToString());
 
         }
+
+        [Theory]
+        [InlineData('A', 'a')]
+        [InlineData('Z', 'z')]
+        [InlineData('#', '#')]
+        public void ConvertCharactersToLowerCaseWithToLowerMethod(char input, char expectedOutput)
+        {
+            Assert.Equal(expectedOutput, char.ToLower(input));
+        }
     }
 }

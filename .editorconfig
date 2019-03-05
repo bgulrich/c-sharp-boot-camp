@@ -1,5 +1,5 @@
 # Walmart DFW C# Editor Config File
-# Version 0.2 (please increment me if you edit anything below)
+# Version 0.3 (please increment me if you edit anything below)
 # settings based on: .NET Core Language EditorConfig: https://github.com/dotnet/corefx/blob/master/.editorconfig
 
 ###############################
@@ -16,6 +16,16 @@ insert_final_newline     = true
 indent_style             = space
 indent_size              = 4
 trim_trailing_whitespace = true
+
+# C# TestFiles (*Should.cs)
+[*Should.cs]
+# async methods - PascalCase (don't require async suffix)
+dotnet_naming_style.test_async_method_style.capitalization  = pascal_case
+dotnet_naming_rule.test_async_method_rule.style             = test_async_method_style
+dotnet_naming_rule.test_async_method_rule.severity          = error
+dotnet_naming_rule.test_async_method_rule.symbols           = async_methods
+dotnet_naming_symbols.test_async_methods.applicable_kinds   = method
+dotnet_naming_symbols.test_async_methods.required_modifiers = async
 
 # C# files
 [*.cs]

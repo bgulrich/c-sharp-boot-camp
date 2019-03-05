@@ -11,16 +11,13 @@ namespace BuiltInTypesTests
         public void BeRecognizedAsDoubleType()
         {
             var unknownTypeValue = 4.0;
-
-            Assert.Equal("System.Double", unknownTypeValue.GetType().ToString());
+            Assert.Equal(typeof(double), unknownTypeValue.GetType());
         }
-
 
         [Fact]
         public void OverflowWhenOutOfRange()
         {
             double maxDouble = double.MaxValue;
-
             Assert.True(double.IsPositiveInfinity(maxDouble * 2));
         }
 
