@@ -10,7 +10,8 @@ namespace EventTests
         #region Custom
         private class CalculateCalledEventArgs : EventArgs
         {
-            public int Count { get; }
+            private int Count { get; }
+
             public CalculateCalledEventArgs(int count)
             {
                 Count = count;
@@ -22,16 +23,16 @@ namespace EventTests
 
         private class SomeClass
         {
-            public int _calculationCount = 0;
+            private int _calculationCount = 0;
 
             // full generic
-            //public event EventHandler<int> CalculateCalled;
+            public event EventHandler<int> CalculateCalled;
 
             // generic delegate + custom event args
             //public event EventHandler<CalculateCalledEventArgs> CalculateCalled;
 
             // full custom
-            public event CalculateCalledEventHandler CalculateCalled;
+            //public event CalculateCalledEventHandler CalculateCalled;
 
             public void Calculate(Guid guid)
             {
@@ -43,12 +44,11 @@ namespace EventTests
                 //CalculateCalled?.Invoke(this, _calculationCount);
 
                 // either custom implemeentation
-                CalculateCalled?.Invoke(this, new CalculateCalledEventArgs(_calculationCount));
+                CalculateCalled?.Invoke(this, _calculationCount);// new CalculateCalledEventArgs(_calculationCount));
             }
         }
 
         #endregion
-
 
         [Fact]
         public void AppropriatelyHandleSubscriptionAndUnsubscription()
@@ -75,18 +75,18 @@ namespace EventTests
             //};
 
             // generic
-            //void EventRaised(object o, int i)
-            //{
-            //    ++handledCount;
-            //    lastCalculationCount = i;
-            //}
-
-            // custom
-            void EventRaised(object o, CalculateCalledEventArgs args)
+            void EventRaised(object o, int i)
             {
                 ++handledCount;
-                lastCalculationCount = args.Count;
+                lastCalculationCount = i;
             }
+
+            // custom
+            //void EventRaised(object o, CalculateCalledEventArgs args)
+            //{
+            //    ++handledCount;
+            //    lastCalculationCount = args.Count;
+            //}
 
             // that's better
             sc.CalculateCalled += EventRaised;

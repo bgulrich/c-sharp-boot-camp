@@ -8,6 +8,6 @@ namespace DelegateTests
     {
         int CountLetters(string input);
 
-        void SomeAction(string inputString, int intputInt);
+        void SomeAction(string inputString, int inputInt);
     }
 }

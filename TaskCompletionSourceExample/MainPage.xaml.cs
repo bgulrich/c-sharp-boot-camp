@@ -28,7 +28,7 @@ namespace TaskCompletionSourceExample
         public MainPage()
         {
             this.InitializeComponent();
-            Workflow();
+            WorkflowAsync();
         }
 
         private void ButtonClick(object sender, RoutedEventArgs e)
@@ -36,7 +36,7 @@ namespace TaskCompletionSourceExample
             tcs.TrySetResult(null);
         }
 
-        private async Task Workflow()
+        private async Task WorkflowAsync()
         {
             tcs = new TaskCompletionSource<object>();
 
@@ -49,7 +49,7 @@ namespace TaskCompletionSourceExample
             {
                 Button.IsEnabled = false;
 
-                await CountDown($"Long running task {iteration++}");
+                await CountDownAsync($"Long running task {iteration++}");
 
                 tcs = new TaskCompletionSource<object>();
 
@@ -59,7 +59,7 @@ namespace TaskCompletionSourceExample
             }
         }
 
-        private async Task CountDown(string prefix)
+        private async Task CountDownAsync(string prefix)
         {
             for (int i = 3; i > 0; --i)
             {

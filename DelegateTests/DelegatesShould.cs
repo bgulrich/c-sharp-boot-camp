@@ -6,7 +6,7 @@ namespace DelegateTests
 {
     public class DelegatesShould
     {
-        private Mock<ISomeInterface> _mockInterface = new Mock<ISomeInterface>();
+        private readonly Mock<ISomeInterface> _mockInterface = new Mock<ISomeInterface>();
 
         // declare new delegate type
         private delegate int CountLettersDelegate(string input);
@@ -17,17 +17,30 @@ namespace DelegateTests
             {
                 return input.Length;
             }
+
+            public static int CountLettersDouble(string input)
+            {
+                return input.Length * 2;
+            }
+        }
+
+        private class SomeClass
+        {
+            public int DoSomething(string input)
+            {
+                return input.Length;
+            }
         }
 
         [Fact]
-        public void PassVariableToMethod()
+        public void PassParametersToMethod()
         {
             var input = "My input string";
 
             _mockInterface.Setup(i => i.CountLetters(It.Is<string>(s => s == input)))
                           .Verifiable();
 
-            //CountLettersDelegate d = _mockInterface.Object.CountLetters;
+            // CountLettersDelegate d = _mockInterface.Object.CountLetters;
             // OR 
             var del = new CountLettersDelegate(_mockInterface.Object.CountLetters);
 

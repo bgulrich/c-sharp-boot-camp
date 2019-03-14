@@ -8,7 +8,7 @@ namespace DelegateTests
 {
     public class FunctionsShould
     {
-        private Mock<ISomeInterface> _mockInterface = new Mock<ISomeInterface>();
+        private readonly Mock<ISomeInterface> _mockInterface = new Mock<ISomeInterface>();
 
         [Fact]
         public void PassVariableToMethod()
