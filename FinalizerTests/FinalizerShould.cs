@@ -41,7 +41,6 @@ namespace FinalizerTests
             public static int DerivedFinalizerCount { get; private set; } = 0;
             public static DateTime? FirstDerivedFinalizerTime { get; private set; }
 
-
             ~SomeDerivedClass()
             {
                 FirstDerivedFinalizerTime = FirstDerivedFinalizerTime ?? DateTime.Now;

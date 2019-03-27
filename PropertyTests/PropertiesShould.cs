@@ -60,7 +60,7 @@ namespace PropertyTests
             public float X
             {
                 get => _x;
-                set => _x = value;
+                //set => _x = value;
             }
 
             public float Y { get; set; }

@@ -24,7 +24,7 @@ namespace ModifierTests
                 return "blah";
             }
 
-            // properties, indexers, and events may be virtual to
+            // properties, indexers, and events may be virtual too
             public virtual int SomeProperty { get; set; }
             public virtual string this[int index] => "something";
             public virtual event EventHandler<int> SomeEvent;
@@ -60,9 +60,9 @@ namespace ModifierTests
             }
 
             // cannot override Blah
-            //public override string Blah()
+            //public override string blah()
             //{
-            //    return base.Blah();
+            //    return base.blah();
             //}
         }
 

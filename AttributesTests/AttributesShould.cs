@@ -56,6 +56,8 @@ namespace AttributeTests
         {
             var assembly = this.GetType().Assembly;
 
+            var types = assembly.GetTypes();
+
             var taggedTypes = assembly.GetTypes().Where(t => t.GetCustomAttributes(typeof(TagAttribute), false).Any());
 
             Assert.Equal(2, taggedTypes.Count());

@@ -7,6 +7,7 @@ namespace ConstructorTests
 {
     public class BaseConstructorsShould
     {
+        #region Helpers
         private class SomeBaseClass
         {
             public static DateTime? FloatTime { get; private set; } = null;
@@ -43,6 +44,7 @@ namespace ConstructorTests
                 S = s;
             }
         }
+        #endregion
 
         [Fact]
         public void BeCalledBeforeConstructorBody()
@@ -51,6 +53,9 @@ namespace ConstructorTests
 
             Assert.True(SomeDerivedClass.FloatTime < SomeDerivedClass.IntTime);
             Assert.True(SomeDerivedClass.IntTime < SomeDerivedClass.StringTime);
+
+            var x = new A(1, 2, 3, 4, 5f);
+            var y = new A(1, 2, 3, 4, "5f");
         }
     }
 }

@@ -23,12 +23,15 @@ namespace GenericsTests
         public void AllowInvocationWithMoreDerivedTypeForCovariantMethod()
         {
             // illegal - Workers<T> is invariant, so we can't convert
-            // Workers<Employee> e = developers;
+            // Workers<Employee> e = _developers;
 
-            // illegal - can't impolicitly convert to more derived type
-            //IReadOnlyEmployeeCollection<CSharpDeveloper> csDevs = developers;
+            // illegal - can't implicitly convert to more derived type
+            //IReadOnlyEmployeeCollection<CSharpDeveloper> csDevs = _developers;
 
             // implicitly convert to less derived type (acceptable conversion)
+            // so although the underlying collection is of type Developer,
+            // we can use it as though it were type Employee
+            // experiment: remove out modifier from interface declaration
             IReadOnlyEmployeeCollection<Employee> employees = _developers;
 
             foreach (var employee in employees.GetAll())
@@ -44,9 +47,12 @@ namespace GenericsTests
             //Workers<CSharpDeveloper> workers = developers;
             
             // illegal - can't implicitly convert to less derived type
-            // IWriteOnlyEmployeeCollection<Employee> employeesWriteCollection = developers;
+            // IWriteOnlyEmployeeCollection<Employee> employeesWriteCollection = _developers;
 
-            // implicitly conver to a more derived type (acceptable conversion)
+            // implicitly convert to a more derived type (acceptable conversion)
+            // so although the underlying collection is of type Developer,
+            // we can use it as though it were of type CSharpDeveloper
+            // experiment: remove in modifier from interface declaration
             IWriteOnlyEmployeeCollection<CSharpDeveloper> csharpDevelopers = _developers;
             csharpDevelopers.Add(new CSharpDeveloper { Name = "Brandon" });
         }
