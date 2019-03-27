@@ -52,16 +52,16 @@ namespace PropertyTests
         // or classes.
         private class PointClass : IReadWritePoint
         {
-            // public float X { get; set; }
+             public float X { get; set; }
 
             // backer + expression body accessors
-            private float _x;
+            //private float _x;
 
-            public float X
-            {
-                get => _x;
-                //set => _x = value;
-            }
+            //public float X
+            //{
+            //    get => _x;
+            //    //set => _x = value;
+            //}
 
             public float Y { get; set; }
         }

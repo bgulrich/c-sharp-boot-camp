@@ -6,6 +6,14 @@ namespace NullablesTests
     public class NullableShould
     {
         [Fact]
+        public void HaveANullDefaultValue()
+        {
+            float? nullableFloat = default(Nullable<float>);
+
+            Assert.Null(nullableFloat);
+        }
+
+        [Fact]
         public void ReportCorrectHasValue()
         {
             int? nullableInt = null;
@@ -31,7 +39,7 @@ namespace NullablesTests
         }
 
         [Fact]
-        public void ReturnCorrectValueWhenGetValueOrdefaultIsCalled()
+        public void ReturnCorrectValueWhenGetValueOrDefaultIsCalled()
         {
             int? nullableInt = null;
 
@@ -43,7 +51,7 @@ namespace NullablesTests
         }
 
         [Fact]
-        public void ReturnCorrectValueWhenGetValueOrdefaultIsCalledWithSpecifiedDefaultValue()
+        public void ReturnCorrectValueWhenGetValueOrDefaultIsCalledWithSpecifiedDefaultValue()
         {
             int? nullableInt = null;
 

@@ -51,11 +51,8 @@ namespace ConstructorTests
         {
             var sc = new SomeDerivedClass("blah", 5, 6.0f);
 
-            Assert.True(SomeDerivedClass.FloatTime < SomeDerivedClass.IntTime);
-            Assert.True(SomeDerivedClass.IntTime < SomeDerivedClass.StringTime);
-
-            var x = new A(1, 2, 3, 4, 5f);
-            var y = new A(1, 2, 3, 4, "5f");
+            Assert.True(SomeDerivedClass.FloatTime<SomeDerivedClass.IntTime);
+            Assert.True(SomeDerivedClass.IntTime<SomeDerivedClass.StringTime);
         }
     }
 }
