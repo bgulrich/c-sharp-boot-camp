@@ -38,8 +38,21 @@ namespace CollectionTests
         #endregion
 
         #region Methods
+
+        private class DisposableThing : IDisposable
+        {
+            public static int DisposedCount { get; private set; } = 0;
+
+            public void Dispose()
+            {
+                ++DisposedCount;
+            }
+        }
+
         private static class Yields
         {
+            public static int FibonacciFinallyCount { get; private set; } = 0;
+
             public static IEnumerable<int> CountTo(int input)
             {
                 var i = 0;
@@ -53,9 +66,37 @@ namespace CollectionTests
                 }
             }
 
+            public static IEnumerable<int> GetFibonacciNumbers()
+            {
+                var previous = 0;
+                var current = 1;
+                var temp = 0;
+
+                yield return 0;
+
+                try
+                {
+                    while (true)
+                    {
+                        yield return current;
+                        temp = previous;
+                        previous = current;
+
+                        // prevent overflow
+                        if (temp + (long)previous > int.MaxValue)
+                            yield break;
+
+                        current = temp + previous;
+                    }
+                }
+                finally
+                {
+                    ++FibonacciFinallyCount;
+                }
+            }
+
             public static IEnumerable<string> GetLines(string filePath)
             {
-                // read lines one at a time
                 using (var textFile = File.OpenText(filePath))
                 {
                     string line;
@@ -66,7 +107,22 @@ namespace CollectionTests
                     }
                 }
             }
+
+            public static IEnumerable<int> GetRandomNumbers()
+            {
+                var rand = new Random();
+
+                // can use "using" with yield
+                using (var dt = new DisposableThing())
+                {
+                    while (true)
+                    {
+                        yield return rand.Next();
+                    }
+                }
+            }
         }
+
         #endregion
 
         #endregion
@@ -96,6 +152,70 @@ namespace CollectionTests
                 Assert.Equal(count, expected[index]);
                 ++index;
             }
+        }
+
+        [Fact]
+        public void ExecuteFinallyBlockWhenEnumeratorDisposed()
+        {
+            var previousFinallyCount = Yields.FibonacciFinallyCount;
+
+            using (var fibEnumerator = Yields.GetFibonacciNumbers().GetEnumerator())
+            {
+                for (int i = 0; i < 10; ++i)
+                {
+                    fibEnumerator.MoveNext();
+                }
+            }
+
+            Assert.Equal(previousFinallyCount + 1, Yields.FibonacciFinallyCount);
+        }
+
+        [Fact]
+        public void ExecuteUsingDisposalWhenEnumeratorDisposed()
+        {
+            #region explicit dispose
+            var previousDisposedCount = DisposableThing.DisposedCount;
+
+            var enumerator = Yields.GetRandomNumbers().GetEnumerator();
+            // make something happen
+            enumerator.MoveNext();
+            enumerator.MoveNext();
+
+            enumerator.Dispose();
+
+            Assert.Equal(previousDisposedCount + 1, DisposableThing.DisposedCount);
+
+            #endregion
+
+            #region
+            previousDisposedCount = DisposableThing.DisposedCount;
+
+            // using
+            using (var randomEnumerator = Yields.GetRandomNumbers().GetEnumerator())
+            {
+                for (int i = 0; i < 10; ++i)
+                {
+                    randomEnumerator.MoveNext();
+                    Console.WriteLine(randomEnumerator.Current);
+                }
+            }
+
+            Assert.Equal(previousDisposedCount + 1, DisposableThing.DisposedCount);
+
+            #endregion
+
+            #region
+            //previousDisposedCount = DisposableThing.DisposedCount;
+
+            //// foreach
+            //foreach (var rand in Yields.GetFibonacciNumbers())
+            //{
+            //    if (rand < 10000)
+            //        break;
+            //}
+
+            //Assert.Equal(previousDisposedCount + 1, DisposableThing.DisposedCount);
+            #endregion
         }
 
         /// <summary>

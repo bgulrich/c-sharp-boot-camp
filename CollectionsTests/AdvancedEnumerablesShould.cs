@@ -7,7 +7,7 @@ using Xunit;
 
 namespace CollectionTests
 {
-    public class IEnumerablesShould
+    public class AdvancedEnumerablesShould
     {
         #region Enumeration
         /// <summary>
@@ -92,6 +92,7 @@ namespace CollectionTests
                     var i = 1;
                     do
                     {
+                        // just return an {i,i} thing for the ith element
                         yield return new Thing { A = i, B = i };
 
                     } while (++i < 20);
@@ -100,18 +101,43 @@ namespace CollectionTests
 
             public static void DoubleBValues(IEnumerable<Thing> things)
             {
+                // double the value of B for each element
                 foreach (var thing in things)
                     thing.B = thing.B << 1;
             }
 
             public static IEnumerable<Thing> DoubleBValuesEnumerably(IEnumerable<Thing> things)
             {
+                // don't just modify the value, return the new value
                 foreach(var thing in things)
                 {
+                    // illegal - can't tamper with iteration variable
+                    // thing = new Thing();
+
+                    // but we can modify it's properties
                     thing.B = thing.B << 1;
                     yield return thing;
                 }
             }
+
+            //public static IEnumerable<int> GetPositiveIntegers()
+            //{
+            //    int i = 0;
+
+            //    while (true)
+            //    {
+            //        yield return ++i;
+            //    }
+            //}
+
+            //public static IEnumerable<int> GetOdds(IEnumerable<int> numbers)
+            //{
+            //    foreach (var number in numbers)
+            //    {
+            //        if (number % 2 == 1)
+            //            yield return number;
+            //    }
+            //}
             #endregion
 
             #region Alphabet subset
@@ -185,10 +211,19 @@ namespace CollectionTests
             // this will enumerate things once through and return its modified values nowhere
             Helpers.DoubleBValues(things);
 
-            // this will start enumerating things again (values not doubled)
+            // checking the first element yields a B that wasn't doubled - why not? -> this enumerates again (with a new enumerator)
+            // don't believe me? step through it with breakpoints!
             Assert.Equal(1, things.First().B);
 
             var i = 1;
+
+            foreach (var doubledBThing in things)
+            {
+                // this will start enumerating things again (values not doubled)
+                Assert.Equal(i++, doubledBThing.B);
+            }
+
+            i = 1;
 
             // grab each doubled value one-by-one gives us the expected behavior
             foreach(var doubledBThing in Helpers.DoubleBValuesEnumerably(Helpers.Things))
