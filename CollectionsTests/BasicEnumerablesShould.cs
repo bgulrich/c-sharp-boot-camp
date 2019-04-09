@@ -116,7 +116,7 @@ namespace CollectionTests
         }
 #endregion
 
-#region Tests
+        #region Tests
 
         [Fact]
         public void EnumerateItems()
@@ -223,7 +223,7 @@ namespace CollectionTests
             jEnumerator.Dispose();
         }
 
-#endregion
+        #endregion
     }
 
 }

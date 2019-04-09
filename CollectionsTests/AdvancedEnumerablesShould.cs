@@ -206,6 +206,9 @@ namespace CollectionTests
         [Fact]
         public void CauseMeToBeCarefulWhenModifying()
         {
+            // try me - the unit test will fail
+            //var things = new List<Thing> {new Thing {A = 1, B = 1}, new Thing {A = 2, B = 2}};
+
             var things = Helpers.Things;
 
             // this will enumerate things once through and return its modified values nowhere
