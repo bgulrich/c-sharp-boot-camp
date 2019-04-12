@@ -110,7 +110,7 @@ namespace CollectionTests
         }
 
         [Fact]
-        public void HaveSlowerAdditionsAtCapacityBoundries()
+        public void HaveSlowerAdditionsAtCapacityBoundaries()
         {
             // start with a size of 2
             var list = new List<int>();

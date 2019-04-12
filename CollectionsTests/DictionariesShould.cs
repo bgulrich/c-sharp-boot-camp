@@ -63,7 +63,6 @@ namespace CollectionTests
 
             Assert.Equal("popcorn", value);
 
-
             Assert.False(items.ContainsKey(123456));
             Assert.False(items.ContainsKey(456789));
         }
