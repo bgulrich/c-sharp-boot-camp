@@ -64,7 +64,7 @@ namespace CollectionTests
                 }
             }
 
-            // this array of arrays is not truly jagged and therefore won't give us any benefit over a multidimensional array
+            // this array of arrays of arrays is not truly jagged and therefore won't give us any benefit over a multidimensional array
         }
     }
 }
