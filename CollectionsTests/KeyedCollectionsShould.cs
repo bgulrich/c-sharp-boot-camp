@@ -51,7 +51,7 @@ namespace CollectionTests
             };
 
             // cast only necessary because our key is an integer and its indexer is given priority
-            Assert.Equal("bubble gum", ((IList < StoreItem>)items)[0].Name);
+            Assert.Equal("bubble gum", ((IList<StoreItem>)items)[0].Name);
             Assert.Equal("popcorn",    ((IList<StoreItem>)items)[1].Name);
         }
 
