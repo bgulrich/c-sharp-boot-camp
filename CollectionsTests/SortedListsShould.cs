@@ -247,7 +247,7 @@ namespace CollectionTests
             // wrapped in ReadOnlyDictionary<TKey,TValue> which doesn't allow access to underlying dictionary
             var readOnlySortedList = new ReadOnlyDictionary<int,string>(sortedList);
 
-            // IDictionary implemented explicitly -> nave to cast to use
+            // IDictionary implemented explicitly -> have to cast to use
             Assert.Equal(2, readOnlySortedList.Count);
             Assert.Throws<NotSupportedException>(() => (readOnlySortedList as IDictionary<int, string>).Add(987654, "blah"));
             Assert.Throws<NotSupportedException>(() => (readOnlySortedList as IDictionary<int, string>)[987654] = "blah");

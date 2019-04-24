@@ -229,13 +229,10 @@ namespace CollectionTests
             Action a = () =>
             {
                 var lines = Yields.GetLines("TestLines.txt");
-                var timeout = DateTime.Now.AddSeconds(5);
+                var timeout = DateTime.Now.AddMilliseconds(100);
 
                 foreach (var line in lines)
                 {
-                    // write to the console to slow us down
-                    Console.WriteLine(line);
-
                     ++linesRead;
 
                     if (DateTime.Now > timeout)

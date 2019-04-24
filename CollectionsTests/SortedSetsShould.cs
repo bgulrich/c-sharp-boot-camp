@@ -40,7 +40,6 @@ namespace CollectionTests
             {
                 Assert.True(previous == null || city.CompareTo(previous) > 0);
                 previous = city;
-
             }
         }
 
