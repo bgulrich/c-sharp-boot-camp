@@ -23,10 +23,15 @@ namespace LambdaTests
             // or with explicit parameter types
             Func<int, int> explicitParameterIncrementer = (int i) => i + 1;
 
+            // this is silly, but it's just a delegate
+            explicitParameterIncrementer += (int i) => i + 2;
+
 
             Assert.Equal(12, incrementer(11));
             Assert.Equal(12, explicitReturnIncrementer(11));
-            Assert.Equal(12, explicitParameterIncrementer(11));
+
+            // 13 - remember delegate rules (both expressions called and second is returned)
+            Assert.Equal(13, explicitParameterIncrementer(11));
 
             #endregion
 
