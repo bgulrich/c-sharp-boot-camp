@@ -204,7 +204,7 @@ namespace LambdaTests
                 synchronizedIncrementorTimes.Add(DateTime.Now - start);
             };
 
-            // kick off 3 incrementor tasks and 3 synchronized incrementor tasks
+            // kick off 3 incrementer tasks and 3 synchronized incrementer tasks
             await Task.WhenAll(Task.Factory.StartNew(incrementor), Task.Factory.StartNew(incrementor), Task.Factory.StartNew(incrementor),
                                Task.Factory.StartNew(synchronizedIncrementor), Task.Factory.StartNew(synchronizedIncrementor), Task.Factory.StartNew(synchronizedIncrementor));
 

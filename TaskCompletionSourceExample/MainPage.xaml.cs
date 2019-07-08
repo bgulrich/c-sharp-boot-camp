@@ -34,6 +34,8 @@ namespace TaskCompletionSourceExample
         private void ButtonClick(object sender, RoutedEventArgs e)
         {
             tcs.TrySetResult(null);
+
+        
         }
 
         private async Task WorkflowAsync()
