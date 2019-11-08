@@ -78,8 +78,11 @@ namespace TPL.CompositeTaskTests
             //tcs2.SetResult(null);
             //tcs3.SetResult(null);
 
-            var comp = Task.WhenAny(tcs1.Task, tcs2.Task, tcs3.Task).Unwrap();
-            Assert.Equal(firstTaskStatus, comp.Status);
+            var comp = Task.WhenAny(tcs1.Task, tcs2.Task, tcs3.Task);
+            // composite task is always RanToCompletion status when complete
+            Assert.Equal(TaskStatus.RanToCompletion, comp.Status);
+            // result task's status will match the completed child task's status
+            Assert.Equal(firstTaskStatus, comp.Result.Status);
         }
         #endregion
     }
