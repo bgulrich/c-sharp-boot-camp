@@ -4,7 +4,7 @@ using System.Text;
 using System.Linq;
 using Xunit;
 
-namespace LinqTests.Operators
+namespace LinqTests.Operations.Partitioning
 {
     public class SkipShould
     {

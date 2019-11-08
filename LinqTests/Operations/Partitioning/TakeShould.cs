@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace LinqTests.Operators
+namespace LinqTests.Operations.Partitioning
 {
-    public class TakeShould : OperatorBase
+    public class TakeShould : OperationBase
     {
         [Fact]
         public void OnlyIncludeCountItemsIfTheSequenceLengthIsGreaterThanCount()

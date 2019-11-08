@@ -11,12 +11,12 @@ namespace ThreadBasedTaskTests
         [Fact]
         public async Task ReturnImmediately()
         {
-            int counter = 0;
+            var counter = 0;
 
             var t = Task.Factory.StartNew(() =>
             {
                 Task.Delay(100).Wait();
-                return counter + 1;
+                return ++counter;
             });
 
             var continuationTask = t.ContinueWith((continueFromTask) =>
@@ -27,8 +27,10 @@ namespace ThreadBasedTaskTests
 
             counter = 100;
 
+            Assert.Equal(100, counter);
             Assert.Equal(101, await t);
             Assert.Equal(102, await continuationTask);
+            Assert.Equal(101, counter);
         }
     }
 }

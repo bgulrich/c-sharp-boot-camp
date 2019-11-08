@@ -4,9 +4,9 @@ using System.Text;
 using LinqTests.Data;
 using LinqTests.Model;
 
-namespace LinqTests.Operators
+namespace LinqTests.Operations
 {
-    public abstract class OperatorBase
+    public abstract class OperationBase
     {
         protected IEnumerable<Vehicle> Vehicles { get; } = DataLoader.LoadVehiclesFromExcel();
     }

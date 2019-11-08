@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace LinqTests.Operators
+namespace LinqTests.Operations.Sorting
 {
-    public class ReverseShould : OperatorBase
+    public class ReverseShould : OperationBase
     {
         [Fact]
         public void ReverseTheOrderOfTheProvidedSequence()

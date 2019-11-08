@@ -29,7 +29,7 @@ namespace TPL.ExceptionTests
         }
 
         [Fact]
-        public void ThrowWrappingAggregagteExceptionWhenWaited()
+        public void ThrowWrappingAggregateExceptionWhenWaited()
         {
             var exception1 = new Exception("1");
             var exception2 = new Exception("2");
@@ -46,7 +46,7 @@ namespace TPL.ExceptionTests
         }
 
         [Fact]
-        public void ThrowWrappingAggregagteExceptionWhenResultAccessed()
+        public void ThrowWrappingAggregateExceptionWhenResultAccessed()
         {
             var exception1 = new Exception("1");
             var exception2 = new Exception("2");
@@ -76,6 +76,8 @@ namespace TPL.ExceptionTests
             var compositeTask = Task.WhenAll(task1, task2);
 
             var thrownException = await Assert.ThrowsAsync<Exception>(() => compositeTask);
+
+            // which exception will be thrown is indeterminate
             Assert.Contains(new[] { exception1, exception2 }, ex => ex == thrownException);
         }
     }

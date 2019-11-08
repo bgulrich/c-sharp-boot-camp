@@ -5,9 +5,9 @@ using Xunit;
 using System.Linq;
 using LinqTests.Model;
 
-namespace LinqTests.Operators
+namespace LinqTests.Operations.Sorting
 {
-    public class OrderByShould : OperatorBase
+    public class OrderByShould : OperationBase
     {
         [Fact]
         public void OrderByIndicatedPropertyAscending()

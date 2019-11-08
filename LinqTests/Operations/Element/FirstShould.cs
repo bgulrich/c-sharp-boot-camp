@@ -4,16 +4,16 @@ using System.Text;
 using System.Linq;
 using Xunit;
 
-namespace LinqTests.Operators
+namespace LinqTests.Operations.Element
 {
-    public class FirstOrDefaultShould
+    public class FirstShould
     {
         [Fact]
         public void ReturnTheFirstItemInTheSequence()
         {
             var items = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            var first = items.FirstOrDefault();
+            var first = items.First();
 
             Assert.Equal(1, first);
         }
@@ -23,29 +23,31 @@ namespace LinqTests.Operators
         {
             var items = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            var first = items.FirstOrDefault(i => i > 2);
+            var first = items.First(i => i > 2);
 
             Assert.Equal(3, first);
         }
 
         [Fact]
-        public void ReturnDefaultValueIfSequenceContainsNoElements()
+        public void ThrowInvalidOperationExceptionIfSequenceContainsNoElements()
         {
             var items = new int[0];
 
-            var first = items.FirstOrDefault();
-
-            Assert.Equal(default(int), first);
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var first = items.First();
+            });
         }
 
         [Fact]
-        public void ReturnDefaultValueIfSequenceContainsNoElementsThatMatchThePredicate()
+        public void ThrowInvalidOperationExceptionIfSequenceContainsNoElementsThatMatchThePredicate()
         {
             var items = new []{ 1, 2 };
 
-            var first = items.FirstOrDefault(i => i > 2);
-
-            Assert.Equal(default(int), first);
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var first = items.First(i => i > 2);
+            });
         }
     }
 }

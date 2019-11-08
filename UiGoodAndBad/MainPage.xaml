@@ -1,0 +1,32 @@
+﻿<Page
+    x:Class="UiGoodAndBad.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UiGoodAndBad"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel VerticalAlignment="Center">
+            <TextBlock Text="Bad" FontSize="36" HorizontalAlignment="Center" Margin="20"/>
+            <ProgressBar x:Name="BadProgressBar" Margin="20" Width="300" Minimum="0" Maximum="100" Value="0"/>
+            <Button Content="Progress Cycle" Click="BadClick" HorizontalAlignment="Center" Margin="20" FontSize="24"/>
+            <!-- animation rendered by compositor - should have no effect-->
+            <ProgressRing x:Name="BadProgressRing" Height="50" Width="50" Margin="10"/>
+        </StackPanel>
+        <StackPanel VerticalAlignment="Center" Grid.Column="1">
+            <TextBlock Text="Good" FontSize="36" HorizontalAlignment="Center" Margin="20"/>
+            <ProgressBar x:Name="GoodProgressBar" Margin="20" Width="300" Minimum="0" Maximum="100" Value="0"/>
+            <Button Content="Progress Cycle" Click="GoodClick" HorizontalAlignment="Center" Margin="20" FontSize="24"/>
+            <ProgressRing x:Name="GoodProgressRing" Height="50" Width="50" Margin="10"/>
+        </StackPanel>
+
+    </Grid>
+</Page>

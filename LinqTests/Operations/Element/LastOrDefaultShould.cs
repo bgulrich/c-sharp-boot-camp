@@ -4,16 +4,16 @@ using System.Text;
 using System.Linq;
 using Xunit;
 
-namespace LinqTests.Operators
+namespace LinqTests.Operations.Element
 {
-    public class LastShould
+    public class LastOrDefaultShould
     {
         [Fact]
         public void ReturnTheLastItemInTheSequence()
         {
             var items = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            var last = items.Last();
+            var last = items.LastOrDefault();
 
             Assert.Equal(10, last);
         }
@@ -23,31 +23,29 @@ namespace LinqTests.Operators
         {
             var items = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            var last = items.Last(i => i < 9);
+            var last = items.LastOrDefault(i => i < 9);
 
             Assert.Equal(8, last);
         }
 
         [Fact]
-        public void ThrowInvalidOperationExceptionIfSequenceContainsNoElements()
+        public void ReturnDefaultValueIfSequenceContainsNoElements()
         {
             var items = new int[0];
 
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                var last = items.Last();
-            });
+            var last = items.LastOrDefault();
+
+            Assert.Equal(default(int), last);
         }
 
         [Fact]
-        public void ThrowInvalidOperationExceptionIfSequenceContainsNoElementsThatMatchThePredicate()
+        public void ReturnDefaultValueIfSequenceContainsNoElementsThatMatchThePredicate()
         {
             var items = new []{ 1, 2 };
 
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                var last = items.Last(i => i > 2);
-            });
+            var last = items.LastOrDefault(i => i > 2);
+
+            Assert.Equal(default(int), last);
         }
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace LinqTests.Operators
+namespace LinqTests.Operations.Partitioning
 {
-    public class SkipWhileShould : OperatorBase
+    public class SkipWhileShould : OperationBase
     {
         [Fact]
         public void OnlyIncludeSequenceLengthItemsIfTheSequenceLengthIsLessThanCount()

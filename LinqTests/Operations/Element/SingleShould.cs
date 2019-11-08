@@ -4,16 +4,16 @@ using System.Text;
 using System.Linq;
 using Xunit;
 
-namespace LinqTests.Operators
+namespace LinqTests.Operations.Element
 {
-    public class SingleShould
+    public class SingleOrDefaultShould
     {
         [Fact]
         public void ReturnTheOnlyItemInTheSequence()
         {
             var items = new[] { 1 };
 
-            var single = items.Single();
+            var single = items.SingleOrDefault();
 
             Assert.Equal(1, single);
         }
@@ -23,20 +23,19 @@ namespace LinqTests.Operators
         {
             var items = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            var single = items.Single(i => i > 2 && i < 4);
+            var single = items.SingleOrDefault(i => i > 2 && i < 4);
 
             Assert.Equal(3, single);
         }
 
         [Fact]
-        public void ThrowInvalidOperationExceptionIfSequenceContainsNoElements()
+        public void ReturnDefaultValueIfSequenceContainsNoElements()
         {
             var items = new int[0];
 
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                var single = items.Single();
-            });
+            var single = items.SingleOrDefault();
+
+            Assert.Equal(default(int), single);
         }
 
         [Fact]
@@ -46,19 +45,18 @@ namespace LinqTests.Operators
 
             Assert.Throws<InvalidOperationException>(() =>
             {
-                var single = items.Single();
+                var single = items.SingleOrDefault();
             });
         }
 
         [Fact]
-        public void ThrowInvalidOperationExceptionIfSequenceContainsNoElementsThatMatchThePredicate()
+        public void ReturnDefaultValueIfSequenceContainsNoElementsThatMatchThePredicate()
         {
             var items = new []{ 1, 2 };
 
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                var single = items.Single(i => i > 2);
-            });
+            var single = items.SingleOrDefault(i => i > 2);
+
+            Assert.Equal(default(int), single);
         }
 
         [Fact]
@@ -68,7 +66,7 @@ namespace LinqTests.Operators
 
             Assert.Throws<InvalidOperationException>(() =>
             {
-                var single = items.Single(i => i > 2);
+                var single = items.SingleOrDefault(i => i > 2);
             });
         }
     }
