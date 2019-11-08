@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace TPLTests.Exceptions
+namespace TPLTests.Exceptions.AggregateExceptions
 {
     public class HandleShould
     {

@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace TPLTests.Exceptions
+namespace TPLTests.Exceptions.AggregateExceptions
 {
     public class FlattenShould
     {
         [Fact]
-        public void Something()
+        public void FlattenNestedAggregateExceptions()
         {
             var exception1 = new Exception("1");
             var exception2 = new Exception("2");

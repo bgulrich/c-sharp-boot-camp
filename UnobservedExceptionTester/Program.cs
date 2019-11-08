@@ -11,7 +11,7 @@ namespace UnobservedExceptionTester
 
             do
             {
-                Console.WriteLine("\r\nWhat would you like to do? (c)rash the app, (l)ive to fight another day, (n)othing - configuration will decide?");
+                Console.WriteLine("What would you like to do? (c)rash the app, (l)ive to fight another day, (n)othing - configuration will decide?");
 
                 var key = Console.ReadKey();
 

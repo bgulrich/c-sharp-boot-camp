@@ -78,8 +78,8 @@ namespace TPL.CompositeTaskTests
             //tcs2.SetResult(null);
             //tcs3.SetResult(null);
 
-            var comp = Task.WhenAny(tcs1.Task, tcs2.Task, tcs3.Task);
-            Assert.Equal(TaskStatus.RanToCompletion, comp.Status);
+            var comp = Task.WhenAny(tcs1.Task, tcs2.Task, tcs3.Task).Unwrap();
+            Assert.Equal(firstTaskStatus, comp.Status);
         }
         #endregion
     }
