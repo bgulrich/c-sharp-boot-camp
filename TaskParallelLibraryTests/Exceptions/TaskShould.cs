@@ -36,7 +36,7 @@ namespace TPL.ExceptionTests
         }
 
         [Fact]
-        public void ThrowWrappingAggregagteExceptionWhenResultAccessed()
+        public void ThrowWrappingAggregateExceptionWhenResultAccessed()
         {
             var exception = new Exception("Some Exception");
 
@@ -56,7 +56,7 @@ namespace TPL.ExceptionTests
             var task = Task.Factory.StartNew(() => throw exception);
 
             var thrownException = await Assert.ThrowsAsync<Exception>(() => task);
-            Assert.Equal(exception, thrownException);
+            Assert.Same(exception, thrownException);
         }
     }
 }

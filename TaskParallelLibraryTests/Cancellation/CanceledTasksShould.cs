@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Moq;
 using Xunit;
 
-namespace TPL.CancellationTests
+namespace TPL.CancellationTester
 {
     public class CanceledTasksShould
     {
-        public interface ITaskInterface
+        private interface ITaskInterface
         {
             Task<bool> SomeMethod();
         }
@@ -56,7 +56,7 @@ namespace TPL.CancellationTests
         {
             using (var cts = new CancellationTokenSource())
             {
-                var t = new Task(() => { cts.Cancel(); ; cts.Token.ThrowIfCancellationRequested(); }, cts.Token);
+                var t = new Task(() => { cts.Cancel(); cts.Token.ThrowIfCancellationRequested(); }, cts.Token);
 
                 t.RunSynchronously();
 

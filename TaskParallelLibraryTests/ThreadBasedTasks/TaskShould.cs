@@ -8,18 +8,25 @@ namespace TPLTests.ThreadBasedTasks
 {
     public class TaskShould
     {
-        [Fact]
-        public async Task ProgressThroughStatesOfExecution()
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public async Task ProgressThroughStatesOfExecution(bool withError)
         {
-            var counter = 0;
+            var exception = new Exception("test");
 
             var t = new Task<int>(() =>
             {
+                var counter = 0;
+
                 for (var i = 0; i < 20; ++i)
                 {
                     Task.Delay(100).Wait();
                     ++counter;
                 }
+
+                if (withError)
+                    throw exception;
 
                 return counter;
             });
@@ -42,9 +49,36 @@ namespace TPLTests.ThreadBasedTasks
                 await Task.Delay(100);
             }
 
-            Assert.Equal(TaskStatus.RanToCompletion, t.Status);
+            if (withError)
+            {
+                Assert.Equal(TaskStatus.Faulted, t.Status);
+            }
+            else
+            {
+                Assert.Equal(TaskStatus.RanToCompletion, t.Status);
+            }
+        }
 
-            Assert.Equal(20, counter);
+        [Fact]
+        public async Task ReturnResultIfExecutionCompletedSuccessfullyWhenAccessingResultProperty()
+        {
+            var tcs = new TaskCompletionSource<int>();
+
+            tcs.SetResult(5);
+
+            Assert.Equal(5, tcs.Task.Result);
+        }
+
+        [Fact]
+        public async Task ThrowWrappingAggregateExceptionIfAnExceptionThrownDuringExecutionWhenAccessingResultProperty()
+        {
+            var ex = new Exception("test");
+            var tcs = new TaskCompletionSource<int>();
+
+            tcs.SetException(ex);
+
+            var thrownException  = Assert.Throws<AggregateException>(() => tcs.Task.Result);
+            Assert.Same(ex, thrownException.InnerException);
         }
     }
 }
