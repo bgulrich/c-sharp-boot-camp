@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using LinqTests.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace EfCoreExample.Data
 {
@@ -10,6 +12,20 @@ namespace EfCoreExample.Data
     {
         public DbSet<Manufacturer> Manufacturers { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
+
+        public static readonly ILoggerFactory _loggerFactory = new LoggerFactory(new[]
+        {
+            new ConsoleLoggerProvider((category, level)
+                => category == DbLoggerCategory.Database.Command.Name
+                   && level == LogLevel.Information, true)
+        });
+
+        private readonly bool _logSqlToConsole;
+
+        public VehicleContext(bool logSqlToConsole)
+        {
+            _logSqlToConsole = logSqlToConsole;
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,6 +50,9 @@ namespace EfCoreExample.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
+
+            if(_logSqlToConsole)
+                optionsBuilder.UseLoggerFactory(_loggerFactory);
 
             optionsBuilder.UseSqlite("Data Source=vehicles.db;");
         }

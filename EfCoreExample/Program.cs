@@ -14,7 +14,8 @@ namespace EfCoreExample
         {
             Console.Write("Initializing repository...");
 
-            _vehicleRepository = new VehicleRepository();
+            // true to log sql to console, false or nothing to not
+            _vehicleRepository = new VehicleRepository(true);
 
             Console.WriteLine("done.");
 

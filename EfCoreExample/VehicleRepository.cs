@@ -25,9 +25,9 @@ namespace EfCoreExample.Data
     {
         private readonly VehicleContext _dbContext;
 
-        public VehicleRepository()
+        public VehicleRepository(bool logSqlToConsole = false)
         {
-            _dbContext = new VehicleContext();
+            _dbContext = new VehicleContext(logSqlToConsole);
             _dbContext.Database.Migrate();
         }
 
