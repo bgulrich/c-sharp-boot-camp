@@ -8,5 +8,8 @@ namespace LinqTests.Model
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+
+        // Reverse-naviation properties
+        public ICollection<Vehicle> Vehicles { get; set; }
     }
 }

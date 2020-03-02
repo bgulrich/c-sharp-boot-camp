@@ -19,8 +19,8 @@ namespace LinqTests.Model
         // Foreign Keys
         public Guid ManufacturerId { get; set; }
 
-        // Foreign Key Items
-        public virtual Manufacturer Manufacturer { get; set; }
+        // Foreign Key Items (navigation property)
+        public Manufacturer Manufacturer { get; set; }
     }
 
     public class Engine

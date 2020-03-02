@@ -4,7 +4,7 @@ using System.Text;
 using LinqTests.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace LinqTests.Data
+namespace EfCoreExample.Data
 {
     public class VehicleContext : DbContext
     {
@@ -15,12 +15,15 @@ namespace LinqTests.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Manufacturer>().ToTable("Manufacturers");
+            var manufacturerEntity = modelBuilder.Entity<Manufacturer>();
+            manufacturerEntity.ToTable("Manufacturers");
+            manufacturerEntity.HasKey(m => m.Id);
 
             var vehicleEntity = modelBuilder.Entity<Vehicle>();
             vehicleEntity.ToTable("Vehicles");
+            vehicleEntity.HasOne(v => v.Manufacturer).WithMany(m => m.Vehicles).HasForeignKey(v => v.ManufacturerId);
 
-            vehicleEntity.OwnsOne(v => v.Engine);
+            vehicleEntity.OwnsOne(v => v.Engine).OwnsOne(e => e.Fuel);
             vehicleEntity.OwnsOne(v => v.Drivetrain);
             vehicleEntity.OwnsOne(v => v.FuelEconomy);
 
@@ -32,7 +35,7 @@ namespace LinqTests.Data
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlite("vehicles.db");
+            optionsBuilder.UseSqlite("Data Source=vehicles.db;");
         }
     }
 }
