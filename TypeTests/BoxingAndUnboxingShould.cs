@@ -7,7 +7,7 @@ namespace TypeTests
 {
     public class BoxingAndUnboxingShould
     {
-        #region Helpers
+        #region Types
         private struct Point
         {
             public double X { get; set; }

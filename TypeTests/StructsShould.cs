@@ -5,7 +5,7 @@ namespace TypeTests
 {
     public class StructsShould
     {
-        #region Read-only
+        #region Types
 
         private interface IReadOnlyPoint
         {
@@ -28,6 +28,7 @@ namespace TypeTests
             public float Y { get; set; }
         }
 
+        // struct itself marked readonly
         private readonly struct Point_ReadOnly : IReadOnlyPoint // illegal -> , IWriteOnlyPoint, IReadWritePoint
         {
             public float X { get; } // illegal -> set; }
@@ -39,11 +40,11 @@ namespace TypeTests
                 Y = y;
             }
 
-            public void SetY(float y)
-            {
-                // illegal
-                // Y = y;
-            }
+            //public void SetY(float y)
+            //{
+            //    // illegal
+            //    // Y = y;
+            //}
         }
         #endregion
 

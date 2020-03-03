@@ -1,11 +1,11 @@
 ﻿using System;
 using Xunit;
 
-namespace EnumTests
+namespace TypeTests
 {
     public class EnumsShould
     {
-        #region Helpers
+        #region Types
 
         private enum State
         {
