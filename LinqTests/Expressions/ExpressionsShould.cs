@@ -9,7 +9,6 @@ namespace LinqTests.IQueryable
 {
     public class ExpressionsShould
     {
-
         [Fact]
         public void EmitExecutableLogicWhenCompiled()
         {

@@ -7,7 +7,7 @@ namespace TypeTests
 {
     public class InterfacesShould
     {
-        #region Helpers
+        #region Types
 
         private interface IWorker
         {
@@ -62,6 +62,9 @@ namespace TypeTests
 
             iWorker.DoSomeWork();
 
+            // this is illegal
+            //var count = iWorker.WorkIterations;
+
             Assert.Equal(1, worker.WorkIterations);
         }
 
@@ -94,7 +97,7 @@ namespace TypeTests
             //worker.ResetWorkCount();
 
             // reset explicit work count
-            iOtherWorker.ResetWorkCount();
+            ((IOtherWorker)worker).ResetWorkCount();
 
             Assert.Equal(3, worker.WorkIterations);
             Assert.Equal(0, worker.OtherWorkIterations);

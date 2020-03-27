@@ -16,10 +16,10 @@ namespace DelegateTests
         {
             var input = "My input string";
 
-            _mockInterface1.Setup(i => i.CountLetters(It.Is<string>(s => s == input)))
+            _mockInterface1.Setup(i => i.CountLetters(input))
                            .Verifiable();
 
-            _mockInterface2.Setup(i => i.CountLetters(It.Is<string>(s => s == input)))
+            _mockInterface2.Setup(i => i.CountLetters(input))
                            .Verifiable();
 
             // Create two delegate instances and use +operator to combine them

@@ -11,7 +11,7 @@ namespace DelegateTests
         private readonly Mock<ISomeInterface> _mockInterface = new Mock<ISomeInterface>();
 
         [Fact]
-        public void PassVariableToMethod()
+        public void PassParametersToMethod()
         {
             _mockInterface.Invocations.Clear();
 

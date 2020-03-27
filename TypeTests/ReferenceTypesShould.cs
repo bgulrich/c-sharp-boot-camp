@@ -7,7 +7,7 @@ namespace TypeTests
 {
     public class ReferenceTypesShould
     {
-        #region Helpers
+        #region Types
 
         private class Pixel
         {
@@ -16,6 +16,7 @@ namespace TypeTests
             public byte B { get; set; }
 
         }
+
         #endregion
 
         [Fact]

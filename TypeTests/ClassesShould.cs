@@ -5,7 +5,7 @@ namespace TypeTests
 {
     public class ClassesShould
     {
-        #region Helpers
+        #region Types
 
         private interface IReadOnlyPoint
         {

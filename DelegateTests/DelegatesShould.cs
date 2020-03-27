@@ -6,7 +6,7 @@ namespace DelegateTests
 {
     public class DelegatesShould
     {
-        private readonly Mock<ISomeInterface> _mockInterface = new Mock<ISomeInterface>();
+        #region Types
 
         // declare new delegate type
         private delegate int CountLettersDelegate(string input);
@@ -32,12 +32,18 @@ namespace DelegateTests
             }
         }
 
+        #endregion
+
+
+        private readonly Mock<ISomeInterface> _mockInterface = new Mock<ISomeInterface>();
+
         [Fact]
         public void PassParametersToMethod()
         {
             var input = "My input string";
 
             _mockInterface.Setup(i => i.CountLetters(It.Is<string>(s => s == input)))
+                          //.Returns(input.Length)
                           .Verifiable();
 
             // CountLettersDelegate d = _mockInterface.Object.CountLetters;
@@ -55,7 +61,7 @@ namespace DelegateTests
         {
             var input = "My input string";
 
-            _mockInterface.Setup(i => i.CountLetters(It.Is<string>(s => s == input)))
+            _mockInterface.Setup(i => i.CountLetters(input))
                           .Returns(input.Length);
 
             var del = new CountLettersDelegate(_mockInterface.Object.CountLetters);

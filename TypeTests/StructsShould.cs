@@ -53,6 +53,8 @@ namespace TypeTests
         {
             var p = new Point_ReadOnly(5, 5);
 
+            var f = p.X;
+
             // illegal
             // p.X = 10;
         }

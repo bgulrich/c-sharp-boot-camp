@@ -11,13 +11,12 @@ namespace DelegateTests
         private Mock<ISomeInterface> _mockInterface = new Mock<ISomeInterface>();
 
         [Fact]
-        public void PassVariableToMethod()
+        public void PassParametersToMethod()
         {
             var inputString = "My input string";
             var inputInt = 100;
 
-            _mockInterface.Setup(m => m.SomeAction(It.Is<string>(s => s == inputString),
-                                                   It.Is<int>(i => i == inputInt)))
+            _mockInterface.Setup(m => m.SomeAction(inputString, inputInt))
                           .Verifiable();
 
             // Action<string, int> del = _mockInterface.Object.SomeAction;

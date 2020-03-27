@@ -7,7 +7,7 @@ namespace TypeTests
 {
     public class ReferenceEqualsShould
     {
-        #region Helpers
+        #region Types
 
         private class Point
         {
@@ -26,6 +26,8 @@ namespace TypeTests
 
             // always false
             Assert.False(object.ReferenceEquals(x, y));
+            // event when the same variable is passed twice
+            Assert.False(object.ReferenceEquals(x, x));
            
             object o1 = x;
             object o2 = x;
@@ -81,13 +83,14 @@ namespace TypeTests
 
             // make sure the strings are interned
             Assert.NotNull(string.IsInterned(first));
+            Assert.NotNull(string.IsInterned(second));
 
             // same instance (interned)
             Assert.True(object.ReferenceEquals(first, second));
 
             // After a new string is assigned to strA, strA and strB
             // are no longer interned and no longer have reference equality.
-            first = "Goodbye world!";
+            first = "Goodbye world!"; // second.Replace("Hello", "Goodbye");
             Assert.False(object.ReferenceEquals(first, second));
         }
 
@@ -104,7 +107,7 @@ namespace TypeTests
         }
 
         [Fact]
-        public void ReturnFalseForIdenticalStringsIfNoneAreNotInterned()
+        public void ReturnFalseForIdenticalStringsIfBothAreNotInterned()
         {
             // A string that is created at runtime cannot be interned.
             var first = new StringBuilder("Hello world!").ToString();
@@ -128,7 +131,7 @@ namespace TypeTests
         }
 
         [Fact]
-        public void ReturnTrueIfAssignmentOperatorUsedAndStringIsNotInterneds()
+        public void ReturnTrueIfAssignmentOperatorUsedAndStringIsNotInterned()
         {
             // A string that is created at runtime cannot be interned.
             var first = new StringBuilder("Hello world!").ToString();

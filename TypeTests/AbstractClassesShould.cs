@@ -7,19 +7,32 @@ namespace TypeTests
 {
     public class AbstractClassesShould
     {
-        #region Helpers
+        #region Types
 
         private abstract class WorkerBase
         {
             public int WorkIterations { get; protected set; }
             public abstract void DoSomeWork();
+            public abstract float TimeInSeconds { get; set; }
         }
 
         private class Worker : WorkerBase
-        {          
+        {
             public override void DoSomeWork()
             {
                 WorkIterations++;
+            }
+
+            public override float TimeInSeconds { get; set; }
+        }
+
+        private class Manager : WorkerBase
+        {
+            public override float TimeInSeconds { get; set; }
+
+            public override void DoSomeWork()
+            {
+                --WorkIterations;
             }
         }
 
@@ -35,7 +48,7 @@ namespace TypeTests
         [Fact]
         public void BeAssignableFromDerivedTypes()
         {
-            var worker = new Worker();
+            var worker = new Manager();
 
             Assert.Equal(0, worker.WorkIterations);
 
@@ -43,9 +56,7 @@ namespace TypeTests
 
             workerBase.DoSomeWork();
 
-            Assert.Equal(1, workerBase.WorkIterations);
+            Assert.Equal(-1, workerBase.WorkIterations);
         }
-
-        
     }
 }

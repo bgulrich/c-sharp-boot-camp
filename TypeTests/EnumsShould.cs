@@ -88,6 +88,8 @@ namespace TypeTests
             {
                 Assert.Equal(i++, (int)value);
             }
+
+            Assert.Equal(4, i);
         }
 
         #endregion
