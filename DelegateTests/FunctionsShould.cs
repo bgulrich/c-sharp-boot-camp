@@ -17,7 +17,7 @@ namespace DelegateTests
 
             var input = "My input string";
 
-            _mockInterface.Setup(i => i.CountLetters(It.Is<string>(s => s == input)))
+            _mockInterface.Setup(i => i.CountLetters(input))
                           .Verifiable();
 
             // Func<string, int> del = _mockInterface.Object.CountLetters;

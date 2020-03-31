@@ -5,20 +5,20 @@ namespace EventTests
 {
     public class EventsShould
     {
-        #region Helpers      
+        #region Types      
 
         #region Custom
-        private class CalculateCalledEventArgs : EventArgs
-        {
-            private int Count { get; }
+        //private class CalculateCalledEventArgs : EventArgs
+        //{
+        //    public int Count { get; }
 
-            public CalculateCalledEventArgs(int count)
-            {
-                Count = count;
-            }
-        }
+        //    public CalculateCalledEventArgs(int count)
+        //    {
+        //        Count = count;
+        //    }
+        //}
 
-        private delegate void CalculateCalledEventHandler(object sender, CalculateCalledEventArgs args);
+        //private delegate void CalculateCalledEventHandler(object sender, CalculateCalledEventArgs args);
         #endregion
 
         private class SomeClass
@@ -43,8 +43,12 @@ namespace EventTests
                 // generic
                 //CalculateCalled?.Invoke(this, _calculationCount);
 
+                // not preferred
+                //if (CalculateCalled != null)
+                //    CalculateCalled.Invoke(this, new CalculateCalledEventArgs(_calculationCount));
+
                 // either custom implemeentation
-                CalculateCalled?.Invoke(this, _calculationCount);// new CalculateCalledEventArgs(_calculationCount));
+                CalculateCalled?.Invoke(this, _calculationCount); //new CalculateCalledEventArgs(_calculationCount));
             }
         }
 
