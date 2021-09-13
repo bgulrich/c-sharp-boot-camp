@@ -28,6 +28,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AA2D1215-E1A7-4CAD-8355-03560781D4A4}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		C# Boot Camp.docx = C# Boot Camp.docx
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConstructorTests", "ConstructorTests\ConstructorTests.csproj", "{FE48BE71-061C-4E64-90AB-EA1E8C9696BC}"
